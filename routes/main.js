@@ -13,6 +13,10 @@ router.get('/api', (req, res) => {
     res.sendFile(__path + '/views/index.html')
 })
 
+router.get('/profile', (req, res) => {
+    res.sendFile(__path + '/views/profile.html')
+})
+
 router.get('/api/status', async(req, res) => {  
 
 var date = new Date
@@ -35,8 +39,8 @@ var port = process.env.PORT || 8080 || 5000 || 3000
         uptime: muptime(process.uptime()),
         speed: `${neww - old}ms`,
         info:{       
-            owner: 'ZeeoneOfc',            
-            apikey: 'Chat Owner: https://wa.me/62887435047326'
+            owner: 'KAYZOKUN12',            
+            apikey: 'Chat Owner: https://wa.me/6281545537615'
         }
     }
     res.json(status)

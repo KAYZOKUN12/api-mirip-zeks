@@ -7,6 +7,7 @@
 <p> Ojan</p>
 <p> Farhan</p>
 <p> ZeeoneOfc </p>
+<p> KAD TEAM </p>
 */
 __path = process.cwd();
 
@@ -18,6 +19,8 @@ var fetch = require('node-fetch');
 var cheerio = require('cheerio');
 var request = require('request');
 var fs = require('fs');
+var zrapi = require("zrapi");
+var TikTokScraper = require('tiktok-scraper');
 var router  = express.Router();
 var creator = global.creator
 const listkey = global.apikey
@@ -28,6 +31,7 @@ const { fetchJson } = require(__path + '/lib/fetcher.js')
 const options = require(__path + '/lib/options.js');
 const { getBuffer } = require(__path + '/lib/functions.js');
 const oxy = require(__path + '/lib/oxy.js');
+var { RemoveBg } = require('remove.bg');
 
 var {
 	Vokal,
@@ -44,6 +48,16 @@ loghandler = {
         message: 'Masukkan parameter apikey',
         maintanied_by: `${creator}`
     },
+    notcoun: {
+        status: 406,
+        message: 'Forbiden, Invalid country, masukan parameter country'
+        maintanied_by: `${creator}`
+    },
+    notkota: {
+        status: 406,
+        message: 'Forbiden, Invalid kota, masukan parameter kota'
+        maintanied_by: `${creator}`
+    },
     error: {
         status: 503,
         message: 'Service Unavaible, Sedang dalam perbaikan',
@@ -54,9 +68,21 @@ loghandler = {
     	message: 'Forbiden, Invalid apikey, hubungi saya di whatsapp untuk mendapatkan apikey anda',
     	maintanied_by: `${creator}`
     },
+    notusername: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'masukan parameter username'
+    },
+    notnabi: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'masukan parameter nabi'
+    },
     noturl: {
     	status: 403,
-    	message: 'Forbiden, Invlid url, masukkan parameter url',
+    	message: 'Forbiden, Invalid url, masukkan parameter url',
     	maintanied_by: `${creator}`,
     }
 }
@@ -357,6 +383,105 @@ let kin = await video.download()
   res.json(loghandler.apikey)
 }
 })
+
+router.get('/download/tiktod/no-watermark', async (req, res, next) => {
+var apikey = req.query.apikey
+var url = req.query.url
+if(!apikey) return res.json(loghandler.noapikey)
+if (!url) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter url"})
+if(listkey.includes(apikey)){
+     TikTokScraper.getVideoMeta(url, options)
+         .then(vid => {
+             console.log(vid)
+             res.json({
+                 status: true,
+                 creator: `${creator}`,
+                 videoNoWm: vid
+             })
+         })
+         .catch(e => {
+             res.json(loghandler.error)
+         })
+         } else {
+  res.json(loghandler.apikey)
+}
+})
+
+router.get('/download/tiktod/watermark', async (req, res, next) => {
+var apikey = req.query.apikey
+var url = req.query.url
+if(!apikey) return res.json(loghandler.noapikey)
+if (!url) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter url"})
+if(listkey.includes(apikey)){
+     TikTokScraper.getVideoMeta(url, options)
+         .then(vid => {
+             console.log(vid)
+             res.json({
+                 status: true,
+                 creator: `${creator}`,
+                 videoWm: vid
+             })
+         })
+         .catch(e => {
+             res.json(loghandler.error)
+         })
+         } else {
+  res.json(loghandler.apikey)
+}
+})
+
+router.get('/stalker/tiktod', async (req, res, next) => {
+var apikey = req.query.apikey
+var username = req.query.username
+if(!apikey) return res.json(loghandler.noapikey)
+if (!username) return res.json({ status : false, creator : `${creator}`, message : "masukan username"})
+if(listkey.includes(apikey)){        
+    TikTokScraper.getUserProfileInfo(username)
+        .then(user => {
+            res.json({
+                status : true,
+                creator : `${creator}`,
+                result : user
+            })
+        })
+        .catch(e => {
+             res.json({
+                 status : false,
+                 creator : `${creator}`,
+                 message : "Username tidak ditemukan!"
+             })
+         })
+         } else {
+  res.json(loghandler.apikey)
+}
+})
+
+router.get('/infonpm', async (req, res, next) => {
+var apikey = req.query.apikey
+var query = req.query.query
+if(!apikey) return res.json(loghandler.noapikey)
+if (!query) return res.json({ status : false, creator : `${creator}`, message : "Masukan parameter query"})
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://registry.npmjs.org/${query}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result,
+                 message : `jangan lupa Subscribe Youtube ${creator}`
+             })
+         })
+         .catch(e => {
+         	res.sendFile(error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
 // news
 router.get('/news/cnn', async (req, res, next) => {
           var apikey = req.query.apikey
@@ -432,7 +557,7 @@ router.get('/news/tempo', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'Zeeone',
+             	author: 'KAYZOKUN12',
                  result
              })
          })
@@ -455,7 +580,7 @@ router.get('/news/antara', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'Zeeone',
+             	author: 'KAYZOKUN12',
                  result
              })
          })
@@ -477,7 +602,7 @@ router.get('/news/kumparan', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'Zeeone',
+             	author: 'KAYZOKUN12',
                  result
              })
          })
@@ -582,6 +707,188 @@ router.get('/photooxy/pubg-mobile', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+router.get('/photooxy/romantic', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/romantic-messages-for-your-loved-one-391.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/smoke', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/other-design/create-an-easy-smoke-type-effect-390.html", [text,text2])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/burn-paper', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text       
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/write-text-on-burn-paper-388.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/love-message', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/create-a-picture-of-love-message-377.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/message-grass', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/make-quotes-under-grass-376.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/glitch', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       var text2 = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text || !text2) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text & text2"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/make-tik-tok-text-effect-375.html", [text,text2])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/double-heart', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/love-text-effect-372.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/coffe-cup', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/put-any-text-in-to-coffee-cup-371.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/love-text', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/love-text-effect-372.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/photooxy/butterfly', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.text
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
+         if(listkey.includes(apikey)){
+       oxy("https://photooxy.com/logo-and-text-effects/butterfly-text-with-reflection-effect-183.html", [text])
+.then((data) =>{ 
+	res.set({'Content-Type': 'image/png'})
+	res.send(data)
+	})
+.catch((err) =>{
+ res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
 
 // search api
 router.get('/search/google-image', async (req, res, next) => {
@@ -626,6 +933,111 @@ router.get('/search/wallpaper', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+
+router.get('/wallpaper/cyberspace', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/CyberSpace.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/wallpaper/teknologi', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/Technology.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/wallpaper/muslim', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/Islamic.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/wallpaper/programming', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/Programming.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/wallpaper/pegunungan', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/Mountain.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
 router.get('/search/pinterest', async (req, res, next) => {
           var apikey = req.query.apikey
        	var text = req.query.query
@@ -648,13 +1060,14 @@ router.get('/search/pinterest', async (req, res, next) => {
 }
 })
 
+
 //nsfw
 router.get('/nsfw/ass', async (req, res, next) => {
           var apikey = req.query.apikey
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/danzzcoding/data-danzzapi.xyz/main/nsfw/ass.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/ass.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -678,7 +1091,7 @@ router.get('/nsfw/ahegao', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/danzzcoding/data-danzzapi.xyz/main/nsfw/ahegao.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/ahegao.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -701,7 +1114,7 @@ router.get('/nsfw/bdsm', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/danzzcoding/data-danzzapi.xyz/main/nsfw/bdsm.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/bdsm.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -724,7 +1137,7 @@ router.get('/nsfw/blowjob', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/danzzcoding/data-danzzapi.xyz/main/nsfw/blowjob.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/blowjob.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -747,7 +1160,444 @@ router.get('/nsfw/cuckold', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/danzzcoding/data-danzzapi.xyz/main/nsfw/cuckold.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/cuckold.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/cum', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/cum.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/ero', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/ero.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/femdom', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/femdom.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/foot', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/foot.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/gifs', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/gifs.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/glasses', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/glasses.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/hentai', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/hentai.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/jahy', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/jahy.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/manga', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/manga.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/masturbation', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/masturbation.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/neko', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/neko.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/neko2', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/neko2.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/panties', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/panties.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/pussy', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/pussy.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/orgy', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/orgy.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/tentacles', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/tentacles.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/thighs', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/thighs.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/yuri', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/yuri.json`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+        var result = data[Math.floor(Math.random() * data.length)];
+             var requestSettings = {
+      url: result.url,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/nsfw/zettai', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data/main/nsfw/zettai.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -772,7 +1622,7 @@ router.get('/islam/tahlil', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataTahlil.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataTahlil.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -793,7 +1643,7 @@ router.get('/islam/wirid', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataWirid.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataWirid.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -814,7 +1664,7 @@ router.get('/islam/ayatkursi', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataAyatKursi.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataAyatKursi.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -835,7 +1685,7 @@ router.get('/islam/doaharian', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataDoaHarian.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataDoaHarian.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -856,7 +1706,7 @@ router.get('/islam/bacaanshalat', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataBacaanShalat.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataBacaanShalat.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -877,7 +1727,7 @@ router.get('/islam/niatshalat', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataNiatShalat.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataNiatShalat.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -898,7 +1748,7 @@ router.get('/islam/kisahnabi', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataKisahNabi.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataKisahNabi.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -919,7 +1769,7 @@ router.get('/islam/asmaulhusna', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/dataAsmaulHusna.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/dataAsmaulHusna.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -940,7 +1790,7 @@ router.get('/islam/niatsubuh', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/NiatShubuh.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/NiatShubuh.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -961,7 +1811,7 @@ router.get('/islam/niatzuhur', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/NiatDzuhur.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/NiatDzuhur.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -982,7 +1832,7 @@ router.get('/islam/niatmagrib', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/NiatMaghrib.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/NiatMaghrib.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -1024,7 +1874,7 @@ router.get('/islam/niatashar', async (req, res, next) => {
        	var text = req.query.page
        	if(!apikey) return res.json(loghandler.noapikey)
         if(listkey.includes(apikey)){
-       fetch(encodeURI(`https://raw.githubusercontent.com/zeeone-ofc/My-SQL-Results/master/data/NiatAshar.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/My-SQL-Results/master/data/NiatAshar.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
@@ -1062,9 +1912,224 @@ router.get('/game/tebakgambar', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+router.get('/game/susunkata', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/susunkata.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebakbendera', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebakbendera.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebakgame', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebakgame.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebakkata', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebakkata.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebaklirik', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebaklirik.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebaklagu', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebaklagu.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+router.get('/game/tebakkimia', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+       let ra = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/tebakkimia.json')
+	let ha = ra[Math.floor(Math.random() * ra.length)]
+	res.json({
+	status: true,
+	creator: `${creator}`,
+	result: ha
+})
+		})
+         .catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
 
-// other
-router.get('/other/github-stalk', async (req, res, next) => {
+// random gambar
+router.get('/randomgambar/couplepp', async (req, res, next) => {
+var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+	let resultt = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/kopel.json')
+	let random = resultt[Math.floor(Math.random() * resultt.length)]
+
+	res.json({
+	status: true,
+	creator: `${creator}`,
+		result: {
+			male: random.male,
+			female: random.female
+		}
+	})
+})
+.catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/randomgambar/dadu', async (req, res, next) => {
+var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+	let dadu = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/dadu.json')
+	let random = dadu[Math.floor(Math.random() * dadu.length)]
+	var result = await getBuffer(random.result)
+	res.set({'Content-Type': 'image/webp'})
+	res.send(result)
+})
+.catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/randomgambar/coffee', async (req, res, next) => {
+var apikey = req.query.apikey
+       	var text = req.query.page
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+	var result = await getBuffer('https://coffee.alexflipnote.dev/random')
+	res.set({'Content-Type': 'image/png'})
+	res.send(result)
+})
+.catch(e => {
+         	console.log(e);
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+// stalker
+router.get('/stalker/github-stalk', async (req, res, next) => {
           var apikey = req.query.apikey
        	var text = req.query.username
        	if(!apikey) return res.json(loghandler.noapikey)
@@ -1075,7 +2140,7 @@ router.get('/other/github-stalk', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'Zeeone',
+             	author: 'KAYZOKUN12',
                  result
              })
          })
@@ -1087,6 +2152,8 @@ router.get('/other/github-stalk', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+
+// other
 router.get('/other/hilih', async (req, res, next) => {
           var apikey = req.query.apikey
        	var text = req.query.kata
@@ -1174,5 +2241,179 @@ router.get('/other/kbbi', async (req, res, next) => {
   res.json(loghandler.apikey)
 }
 })
+// shorturl
+router.get('/other/tinyurl', async (req, res, next) => {
+var apikey = req.query.apikey
+       	url = req.query.url
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+     if (!url) return res.json(loghandler.noturl)
+     request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
+         try {
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result : `${body}`
+             })
+         } catch (e) {
+             console.log('Error :', color(e,'red'))
+             res.json(loghandler.error)
+         }
+     })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+router.get('/other/linkpoi', async (req, res, next) => {
+var apikey = req.query.apikey
+       	url = req.query.url
+       	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+     if (!url) return res.json(loghandler.noturl)
+     request(`https://linkpoi.ga/api.php?url=${url}`, function (error, response, body) {
+         try {
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result : `${body}`
+             })
+         } catch (e) {
+             console.log('Error :', color(e,'red'))
+             res.json(loghandler.error)
+         }
+     })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+router.get('/other/fakedata', async (req, res, next) => {
+var apikey = req.query.apikey
+        country = req.query.country            
+	if(!apikey) return res.json(loghandler.noapikey)
+        if(listkey.includes(apikey)){
+        if(!country) return res.json(loghandler.notcoun)
+       fetch(encodeURI(`https://fakename-api-zhirrr.vercel.app/api/fakename?country=${country}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.json(loghandler.apikey)
+}
+})
+router.get('/other/gempa', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+		Gempa()
+		.then(result => {
+			res.json({
+				creator: creator,
+				result
+			})
+		})
+		.catch(e => {
+			console.log('Error :', color(e, 'red'))
+			res.json(loghandler.error)
+		})
+	} else {
+res.json(loghandler.apikey)
+}
+})
+router.get('/other/base', async (req, res, next) => {
+	var type = req.query.type,
+		encode = req.query.encode,
+		decode = req.query.decode,
+		var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+		if (!type) return res.json({status: false, creator, code: 404, message: 'masukan parameter type, type yang tersedia : base64 , base32'})
+		if (type == 'base64' && encode){
+				Base("b64enc", encode)
+				.then(result => {
+					res.json({
+						status:true,
+						creator: `${creator}`,
+						result
+					})
+				})
+			} else if (type == 'base64' && decode){
+				Base("b64dec", decode)
+				.then(result => {
+					res.json({
+						status: true,
+						creator: `${creator}`,
+						result
+					})
+				})
+			} else if (type == 'base32' && encode){
+				Base('b32enc', encode)
+				.then(result => {
+					res.json({
+						status:true,
+						creator: `${creator}`,
+						result
+					})
+				})
+			} else if (type == 'base32' && decode){
+				Base('b32dec', decode)
+				.then(result => {
+					res.json({
+						status:true,
+						creator: `${creator}`,
+						result
+					})
+				})
+			} else if(!(encode || decode)){
+				res.json({
+					status:false,
+					creator: `${creator}`,
+					message: "tambahkan parameter encode/decode"
+				})
+			} else {
+				res.json(loghandler.error)
+			}
+	} else {
+res.json(loghandler.apikey)
+}
+});
+
+router.get('/search/removebg', async (req, res, next) => {
+var apikey = req.query.apikey
+var img = req.query.img;
+  try {
+	if(!apikey) return res.json(loghandler.noapikey)
+    if (!img) return res.json(loghandler.notimg)
+	if (!img.startsWith('http')) return res.json(loghandler.error)
+	if (listkey.includes(apikey)){
+	var encmedia = await imageToBase64(img)
+	var media = Buffer.from(encmedia, 'base64')
+	   await fs.writeFileSync(__path + '/tmp/nobg.png', media)
+	      var rbg = RemoveBg('HCVrssExQw8DuaWpj2vE5359', 'error.log')
+              rbg.remove_background_from_img_file(__path + '/tmp/nobg.png')
+
+	  res.sendFile(__path + '/tmp/nobg.png')
+ } catch (e) {
+          console.log(e);
+      res.sendFile(error)
+   }
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+
+router.use(function (req, res) {
+     res.status(404)
+    .set("Content-Type", "text/html")
+    .sendFile(__path + '/views/404.html');
+});
+
 
 module.exports = router
