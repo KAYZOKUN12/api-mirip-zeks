@@ -31,7 +31,7 @@ xhr.send();
 // Visitor
 function getvisitor(){
     var xhr = new XMLHttpRequest();
-    var url = 'https://api.countapi.xyz/hit/api-alphabot.herokuapp.com/visits';
+    var url = 'https://api.countapi.xyz/hit/rest-api-kay/visits';
     xhr.onloadend = function(){
     data = JSON.parse(this.responseText);
     document.getElementById("visits").textContent = data.value
@@ -94,7 +94,7 @@ window.setTimeout("waktu()", 1000);
 	}
 
 // Count Down Idul Adha
-var countDownDate = new Date("Jan 01, 2023 00:00:00").getTime();
+var countDownDate = new Date("Feb 18, 2023 00:00:00").getTime();
 
 var x = setInterval(function() {
   var now = new Date().getTime();
