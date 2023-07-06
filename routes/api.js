@@ -2321,12 +2321,7 @@ var img = req.query.img;
 	   await fs.writeFileSync(__path + '/tmp/nobg.png', media)
 	      var rbg = RemoveBg('HCVrssExQw8DuaWpj2vE5359', 'error.log')
               rbg.remove_background_from_img_file(__path + '/tmp/nobg.png')
-
 	  res.sendFile(__path + '/tmp/nobg.png')
- } catch (e) {
-          console.log(e);
-      res.sendFile(error)
-   }
    } else {
 res.json(loghandler.apikey)
 }
