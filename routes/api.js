@@ -932,7 +932,7 @@ router.get('/search/wallpaper', async (req, res, next) => {
 }
 })
 
-router.get('/wallpaper/cyberspace', async (req, res, next) => {
+router.get('/randomgambar/cyberspace', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -953,7 +953,7 @@ if(listkey.includes(apikey)){
 })
 
 
-router.get('/wallpaper/teknologi', async (req, res, next) => {
+router.get('/randomgambar/teknologi', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -974,7 +974,7 @@ if(listkey.includes(apikey)){
 })
 
 
-router.get('/wallpaper/muslim', async (req, res, next) => {
+router.get('/randomgambar/muslim', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -995,7 +995,7 @@ if(listkey.includes(apikey)){
 })
 
 
-router.get('/wallpaper/programming', async (req, res, next) => {
+router.get('/randomgambar/programming', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -1016,7 +1016,7 @@ if(listkey.includes(apikey)){
 })
 
 
-router.get('/wallpaper/pegunungan', async (req, res, next) => {
+router.get('/randomgambar/pegunungan', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
