@@ -2089,11 +2089,6 @@ var apikey = req.query.apikey
 	var result = await getBuffer(random.result)
 	res.set({'Content-Type': 'image/webp'})
 	res.send(result)
-})
-.catch(e => {
-         	console.log(e);
-         	res.json(loghandler.error)
-})
 } else {
   res.json(loghandler.apikey)
 }
@@ -2108,11 +2103,6 @@ var apikey = req.query.apikey
 	var result = await getBuffer('https://coffee.alexflipnote.dev/random')
 	res.set({'Content-Type': 'image/png'})
 	res.send(result)
-})
-.catch(e => {
-         	console.log(e);
-         	res.json(loghandler.error)
-})
 } else {
   res.json(loghandler.apikey)
 }
