@@ -50,12 +50,12 @@ loghandler = {
     },
     notcoun: {
         status: 406,
-        message: 'Forbiden, Invalid country, masukan parameter country'
+        message: 'Forbiden, Invalid country, masukan parameter country', 
         maintanied_by: `${creator}`
     },
     notkota: {
         status: 406,
-        message: 'Forbiden, Invalid kota, masukan parameter kota'
+        message: 'Forbiden, Invalid kota, masukan parameter kota', 
         maintanied_by: `${creator}`
     },
     error: {
@@ -1924,7 +1924,6 @@ router.get('/game/susunkata', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -1945,7 +1944,6 @@ router.get('/game/tebakbendera', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -1966,7 +1964,6 @@ router.get('/game/tebakgame', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -1987,7 +1984,6 @@ router.get('/game/tebakkata', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -2008,7 +2004,6 @@ router.get('/game/tebaklirik', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -2029,7 +2024,6 @@ router.get('/game/tebaklagu', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -2050,7 +2044,6 @@ router.get('/game/tebakkimia', async (req, res, next) => {
 	creator: `${creator}`,
 	result: ha
 })
-		})
          .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
@@ -2068,7 +2061,6 @@ var apikey = req.query.apikey
         if(listkey.includes(apikey)){
 	let resultt = await fetchJson('https://raw.githubusercontent.com/AlipBot/data-rest-api/main/kopel.json')
 	let random = resultt[Math.floor(Math.random() * resultt.length)]
-
 	res.json({
 	status: true,
 	creator: `${creator}`,
@@ -2077,7 +2069,6 @@ var apikey = req.query.apikey
 			female: random.female
 		}
 	})
-})
 .catch(e => {
          	console.log(e);
          	res.json(loghandler.error)
