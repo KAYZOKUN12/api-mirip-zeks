@@ -19,7 +19,6 @@ var fetch = require('node-fetch');
 var cheerio = require('cheerio');
 var request = require('request');
 var fs = require('fs');
-var zrapi = require("zrapi");
 var TikTokScraper = require('tiktok-scraper');
 var router  = express.Router();
 var creator = global.creator
