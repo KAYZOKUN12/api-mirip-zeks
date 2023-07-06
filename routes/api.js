@@ -2307,63 +2307,6 @@ if (listkey.includes(apikey)){
 res.json(loghandler.apikey)
 }
 })
-router.get('/other/base', async (req, res, next) => {
-var apikey = req.query.apikey
-if(!apikey) return res.json(loghandler.noapikey)
-	var type = req.query.type,
-		encode = req.query.encode,
-		decode = req.query.decode,
-if (listkey.includes(apikey)){
-		if (!type) return res.json({status: false, creator, code: 404, message: 'masukan parameter type, type yang tersedia : base64 , base32'})
-		if (type == 'base64' && encode){
-				Base("b64enc", encode)
-				.then(result => {
-					res.json({
-						status:true,
-						creator: `${creator}`,
-						result
-					})
-				})
-			} else if (type == 'base64' && decode){
-				Base("b64dec", decode)
-				.then(result => {
-					res.json({
-						status: true,
-						creator: `${creator}`,
-						result
-					})
-				})
-			} else if (type == 'base32' && encode){
-				Base('b32enc', encode)
-				.then(result => {
-					res.json({
-						status:true,
-						creator: `${creator}`,
-						result
-					})
-				})
-			} else if (type == 'base32' && decode){
-				Base('b32dec', decode)
-				.then(result => {
-					res.json({
-						status:true,
-						creator: `${creator}`,
-						result
-					})
-				})
-			} else if(!(encode || decode)){
-				res.json({
-					status:false,
-					creator: `${creator}`,
-					message: "tambahkan parameter encode/decode"
-				})
-			} else {
-				res.json(loghandler.error)
-			}
-	} else {
-res.json(loghandler.apikey)
-}
-});
 
 router.get('/search/removebg', async (req, res, next) => {
 var apikey = req.query.apikey
