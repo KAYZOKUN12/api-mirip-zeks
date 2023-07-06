@@ -31,7 +31,6 @@ const { fetchJson } = require(__path + '/lib/fetcher.js')
 const options = require(__path + '/lib/options.js');
 const { getBuffer } = require(__path + '/lib/functions.js');
 const oxy = require(__path + '/lib/oxy.js');
-var { RemoveBg } = require('remove.bg');
 
 var {
 	Vokal,
@@ -2304,25 +2303,6 @@ if (listkey.includes(apikey)){
 			res.json(loghandler.error)
 		})
 	} else {
-res.json(loghandler.apikey)
-}
-})
-
-router.get('/search/removebg', async (req, res, next) => {
-var apikey = req.query.apikey
-var img = req.query.img;
-  try {
-	if(!apikey) return res.json(loghandler.noapikey)
-    if (!img) return res.json(loghandler.notimg)
-	if (!img.startsWith('http')) return res.json(loghandler.error)
-	if (listkey.includes(apikey)){
-	var encmedia = await imageToBase64(img)
-	var media = Buffer.from(encmedia, 'base64')
-	   await fs.writeFileSync(__path + '/tmp/nobg.png', media)
-	      var rbg = RemoveBg('HCVrssExQw8DuaWpj2vE5359', 'error.log')
-              rbg.remove_background_from_img_file(__path + '/tmp/nobg.png')
-	  res.sendFile(__path + '/tmp/nobg.png')
-   } else {
 res.json(loghandler.apikey)
 }
 })
