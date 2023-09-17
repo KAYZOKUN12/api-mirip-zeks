@@ -71,7 +71,6 @@ var {
   mlstlk
 } = require("./../lib/utils/stalk");
 
-
 var {
   ttdownloader,
   igdl,
@@ -81,12 +80,6 @@ var {
   ttdl,
   ssweb
 } = require("./../lib/utils/scraper");
-
-var { 
-  Joox, 
-  FB, 
-  Tiktok
-} = require("./../lib/utils/downloader");
 
 var {
 	Vokal,
@@ -4312,10 +4305,10 @@ let jadi = couler[Math.floor(Math.random() * couler.length)]
 ).then((buffer) =>{
 res.set({'Content-Type': 'gif'})
 res.send(buffer)
+})
 } else {
     	res.json(loghandler.apikey)
     }
-})
 }) 
 
 router.get('/api/maker/ttp', async(req, res, next) => {
