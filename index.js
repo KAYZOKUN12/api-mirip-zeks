@@ -23,7 +23,7 @@ app.get('/docs', (req, res) => {
 app.use('/api', apirouter)
 
 app.listen(PORT, () => {
-    console.log(color("Server running on port " + PORT,'green'))
+    console.log(color("Server running on http://localhost:" + PORT,'green'))
 })
 
 module.exports = app
