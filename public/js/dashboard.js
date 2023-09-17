@@ -94,7 +94,7 @@ window.setTimeout("waktu()", 1000);
 	}
 
 // Count Down Idul Adha
-var countDownDate = new Date("Feb 18, 2023 00:00:00").getTime();
+var countDownDate = new Date("Jan 01, 2023 00:00:00").getTime();
 
 var x = setInterval(function() {
   var now = new Date().getTime();
