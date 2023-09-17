@@ -65,7 +65,8 @@ var {
 } = require("./../lib/utils/ig");
 
 var {
-  wikipedia, 
+  wikipedia,
+  tiktokstalk, 
   twtstalk,
   ffstalk,
   mlstlk
@@ -3891,7 +3892,7 @@ var username = req.query.username
 if(!apikey) return res.json(loghandler.noapikey)
 if (!username) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter username"})
 if(listkey.includes(apikey)){        
-    TikTokScraper.getUserProfileInfo(username)
+    tiktokstalk(username)
         .then(user => {
             res.json({
                 status : true,
