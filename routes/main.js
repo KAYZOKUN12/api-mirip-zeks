@@ -13,11 +13,11 @@ router.get('/api', (req, res) => {
     res.sendFile(__path + '/views/index.html')
 })
 
-router.get('/profile', (req, res) => {
-    res.sendFile(__path + '/views/profile.html')
+router.get('/about', (req, res) => {
+    res.sendFile(__path + '/views/docs.html')
 })
 
-router.get('/api/status', async(req, res) => {  
+router.get('/status', async(req, res) => {  
 
 var date = new Date
 var jam = date.getHours()
