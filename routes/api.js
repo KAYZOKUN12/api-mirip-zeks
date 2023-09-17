@@ -23,7 +23,7 @@ var qrcode = require('qrcode');
 var TikTokScraper = require('tiktok-scraper');
 var Canvas = require('canvas')
 var Canvacord = require("canvacord");
-var canvasGif = require('canvas-gif')
+/*var canvasGif = require('canvas-gif')*/
 var { convertStringToNumber } = require('convert-string-to-number'); 
 var { shortText } = require("limit-text-js")
 var isImageURL = require('image-url-validator').default
@@ -4250,7 +4250,7 @@ router.get('/api/maker/wasted', async(req, res, next) => {
     }
 })
 
-router.get('/api/maker/attp', async (req, res) => {
+/*router.get('/api/maker/attp', async (req, res) => {
 	var apikey = req.query.apikey
 	var text = req.query.text
 	if(!apikey) return res.json(loghandler.noapikey)
@@ -4309,7 +4309,7 @@ res.send(buffer)
 } else {
     	res.json(loghandler.apikey)
     }
-}) 
+})*/
 
 router.get('/api/maker/ttp', async(req, res, next) => {
 	var apikey = req.query.apikey
@@ -4375,7 +4375,7 @@ router.get('/api/maker/emojimix', async(req, res, next) => {
 // other
 router.get('/other/heleh', async(req, res) => {
 	var apikey = req.query.apikey
-	if (!apikey) return if(!apikey) return res.json(loghandler.noapikey)
+	if(!apikey) return res.json(loghandler.noapikey)
 	if(listkey.includes(apikey)){
 	var text = req.query.text
 	if(!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter kata"})
@@ -4394,7 +4394,7 @@ res.json(loghandler.apikey)
 
 router.get('/other/huluh', async(req, res) => {
 	var apikey = req.query.apikey
-	if (!apikey) return if(!apikey) return res.json(loghandler.noapikey)
+	if(!apikey) return res.json(loghandler.noapikey)
 	if(listkey.includes(apikey)){
 	var text = req.query.text
 	if(!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter kata"})
@@ -4413,7 +4413,7 @@ res.json(loghandler.apikey)
 
 router.get('/other/hilih', async(req, res) => {
 	var apikey = req.query.apikey
-	if (!apikey) return if(!apikey) return res.json(loghandler.noapikey)
+	if(!apikey) return res.json(loghandler.noapikey)
 	if(listkey.includes(apikey)){
 	var text = req.query.text
 	if(!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter kata"})
@@ -4432,7 +4432,7 @@ res.json(loghandler.apikey)
 
 router.get('/other/halah', async(req, res) => {
 	var apikey = req.query.apikey
-	if (!apikey) return if(!apikey) return res.json(loghandler.noapikey)
+	if(!apikey) return res.json(loghandler.noapikey)
 	if(listkey.includes(apikey)){
 	var text = req.query.text
 	if(!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter kata"})
