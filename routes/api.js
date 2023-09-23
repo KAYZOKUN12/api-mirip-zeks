@@ -184,8 +184,8 @@ router.get('/cekapikey', async (req, res, next) => {
 		res.json({
 			apikey: apikey,
 status: true,
-limit: 'unlimited'
 creator: `${creator}`,
+limit: 'unlimited'
 		})
 		} else {
 			res.json(loghandler.apikey)
@@ -2880,6 +2880,7 @@ router.get('/nsfw/ahegao', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -2904,6 +2905,7 @@ router.get('/nsfw/bdsm', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -2931,6 +2933,7 @@ router.get('/nsfw/blowjob', async (req, res, next) => {
 .catch((err) =>{
  res.json(loghandler.error)
 })
+})
 } else {
   res.json(loghandler.apikey)
 }
@@ -2949,6 +2952,7 @@ router.get('/nsfw/cuckold', async (req, res, next) => {
 	})
 .catch((err) =>{
  res.json(loghandler.error)
+})
 })
 } else {
   res.json(loghandler.apikey)
@@ -2971,6 +2975,7 @@ router.get('/nsfw/cum', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -2995,6 +3000,7 @@ router.get('/nsfw/ero', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3019,6 +3025,7 @@ router.get('/nsfw/femdom', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3043,6 +3050,7 @@ router.get('/nsfw/foot', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3067,6 +3075,7 @@ router.get('/nsfw/gifs', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3091,6 +3100,7 @@ router.get('/nsfw/glasses', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3115,6 +3125,7 @@ router.get('/nsfw/hentai', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3139,6 +3150,7 @@ router.get('/nsfw/jahy', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3163,6 +3175,7 @@ router.get('/nsfw/manga', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3187,6 +3200,7 @@ router.get('/nsfw/masturbation', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3211,6 +3225,7 @@ router.get('/nsfw/neko', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3235,6 +3250,7 @@ router.get('/nsfw/neko2', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3259,6 +3275,7 @@ router.get('/nsfw/panties', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3283,6 +3300,7 @@ router.get('/nsfw/pussy', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3307,6 +3325,7 @@ router.get('/nsfw/orgy', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3331,6 +3350,7 @@ router.get('/nsfw/tentacles', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3355,6 +3375,7 @@ router.get('/nsfw/thighs', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3379,6 +3400,7 @@ router.get('/nsfw/yuri', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
@@ -3403,6 +3425,7 @@ router.get('/nsfw/zettai', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
