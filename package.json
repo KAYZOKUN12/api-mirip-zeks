@@ -31,9 +31,6 @@
     "brainly-scraper-v2": "^1.1.2",
     "base-64": "^1.0.0",
     "base32": "0.0.6",
-    "canvacord": "^5.3.0",
-    "canvas": "^2.9.1",
-    "canvas-gif": "github:KAYZOKUN12/canvas-gif-attp",
     "convert-string-to-number": "^1.0.3",
     "cookie": "^0.5.0",
     "crypto": "^1.0.1",
@@ -63,7 +60,8 @@
     "urlencode": "^1.1.0",
     "qs": "^6.10.1", 
     "bitly": "^7.1.2",
-    "tinyurl": "^1.1.7"
+    "tinyurl": "^1.1.7",
+    "node-url-shortener": "^2.0.3"
   },
   "homepage": "https://github.com/KAYZOKUN12/api-mirip-zeks#readme"
 }
