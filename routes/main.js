@@ -17,7 +17,11 @@ router.get('/about', (req, res) => {
     res.sendFile(__path + '/views/docs.html')
 })
 
-router.get('/status', async(req, res) => {  
+router.get('/upload', (req, res) => {
+    res.sendFile(__path + '/views/upload.html')
+})
+
+router.post('/status', async(req, res) => {  
 
 var date = new Date
 var jam = date.getHours()
