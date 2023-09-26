@@ -26,7 +26,6 @@ var { shortText } = require("limit-text-js")
 var isImageURL = require('image-url-validator').default
 var isUrl = require('is-url');
 var shortUrl = require("node-url-shortener");
-var TinyUrl = require('tinyurl');
 var BitlyClient = require('bitly').BitlyClient
 var router  = express.Router();
 var creator = global.creator
@@ -38,9 +37,11 @@ const { fetchJson } = require(__path + '/lib/fetcher.js')
 const options = require(__path + '/lib/options.js');
 const { getBuffer } = require(__path + '/lib/functions.js');
 const oxy = require(__path + '/lib/oxy.js');
-const { Tools } = require("./../lib/utils/tools");
+const { tahta } = require(__path + '/lib/tahta.js') 
+const { create } = require(__path + '/lib/textpro.js') 
 
-const tools = new Tools();
+const { Pixnet0rz } = require(__path + '/lib/short.js');
+const Pixnet0rz = new Pixnet0rz();
 
 var {
   CovidIndo, 
@@ -184,8 +185,8 @@ router.get('/cekapikey', async (req, res, next) => {
 		res.json({
 			apikey: apikey,
 status: true,
-creator: `${creator}`,
-limit: 'unlimited'
+limit: 'unlimited', 
+creator: `${creator}`
 		})
 		} else {
 			res.json(loghandler.apikey)
@@ -2708,6 +2709,873 @@ router.get('/search/wallpaper', async (req, res, next) => {
 }
 })
 
+router.get('/search/dare', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const dare =['Kirim pesan ke mantan kamu dan bilang "aku masih suka sama kamu','telfon crush/pacar sekarang dan ss ke pemain','pap ke salah satu anggota grup','Bilang "KAMU CANTIK BANGET NGGAK BOHONG" ke cowo','ss recent call whatsapp','drop emot 🤥 setiap ngetik di gc/pc selama 1 hari','kirim voice note bilang can i call u APRI?','drop kutipan lagu/quote, terus tag member yang cocok buat kutipan itu','pake foto sule sampe 3 hari','ketik pake bahasa daerah 24 jam','ganti nama menjadi "gue anak lucinta luna" selama 5 jam','chat ke kontak wa urutan sesuai %batre kamu, terus bilang ke dia "i lucky to hv you','prank chat mantan dan bilang " i love u, pgn balikan','record voice baca surah al-kautsar','bilang "i hv crush on you, mau jadi pacarku gak?" ke lawan jenis yang terakhir bgt kamu chat (serah di wa/tele), tunggu dia bales, kalo udah ss drop ke sini','sebutkan tipe pacar mu!','snap/post foto pacar/crush','teriak gajelas lalu kirim pake vn kesini','pap mukamu lalu kirim ke salah satu temanmu','kirim fotomu dengan caption, aku anak pungut','teriak pake kata kasar sambil vn trus kirim kesini','teriak " anjimm gabutt anjimmm " di depan rumah mu','ganti nama jadi " BOWO " selama 24 jam','Peluk orang yang NGGAK kamu sukai di kelas dan bilang, Terimakasih banyak kamu sudah bersedia menjadi orang paling baik untukku.','Pura pura kerasukan, contoh : kerasukan maung, kerasukan belalang, kerasukan kulkas, dll','Menggombali orang yang ditaksir, sahabat terdekat, lawan jenis yang tidak dikenal sama sekali dan  sejenisnya.','Menyanyikan lagu HAI TAYO di depan banyak orang sambil menari','Ajak orang yg tidak kamu kenal itu selfie berdua dengan mu lalu upload ke snapgram','Cabut bulu kaki mu sendiri sebanyak 3x','Nyebutin 1 biru sampai 10 biru dengan cepat dan tidak boleh melakukan kesalahan. Jika salah maka harus diulang dari awal.']
+const der = dare[Math.floor(Math.random() * dare.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : der
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/truth', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const trut =['Pernah suka sama siapa aja? berapa lama?','Kalau boleh atau kalau mau, di gc/luar gc siapa yang akan kamu jadikan sahabat?(boleh beda/sma jenis)','apa ketakutan terbesar kamu?','pernah suka sama orang dan merasa orang itu suka sama kamu juga?','Siapa nama mantan pacar teman mu yang pernah kamu sukai diam diam?','pernah gak nyuri uang nyokap atau bokap? Alesanya?','hal yang bikin seneng pas lu lagi sedih apa','pernah cinta bertepuk sebelah tangan? kalo pernah sama siapa? rasanya gimana brou?','pernah jadi selingkuhan orang?','hal yang paling ditakutin','siapa orang yang paling berpengaruh kepada kehidupanmu','hal membanggakan apa yang kamu mekatkan di tahun ini','siapa orang yang bisa membuatmu sange','siapa orang yang pernah buatmu sange','(bgi yg muslim) pernah ga solat seharian?','Siapa yang paling mendekati tipe pasangan idealmu di sini','suka mabar(main bareng)sama siapa?','pernah nolak orang? alasannya kenapa?','Sebutkan kejadian yang bikin kamu sakit hati yang masih di inget','pencapaian yang udah dimeket apa aja ditahun ini?','kebiasaan terburuk lo pas di sekolah apa?','pernah cinta bertepuk sebelah tangan? kalo pernah sama siapa? rasanya gimana kak?','Hal apa yang kamu rahasiakan sampe, sekarang dan gak ada satu orangpun yang tau?','Jika kamu lahir kembali dan harus jadi salah satu dari temanmu, siapa yang akan kamu pilih untuk jadi dia?','Siapa mantan terindah mu? dan mengapa kalian putus ?!','Pilih PACAR atau TEMAN ? berikan alasannya !','Siapa nama artis yang pernah kamu cium fotonya diam-diam?','Siapa orang (lawan jenis) yang paling sering terlintas di pikiranmu?','Siapa nama orang (beda gender) yang menurutmu akan asyik bila dijadikan pacar?']
+const ttrth = trut[Math.floor(Math.random() * trut.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : ttrth
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/katafakta', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const kataf = [
+"Indonesia adalah Tempat ditemukannya ular terpanjang di dunia yaitu, Python Reticulates sepanjang 10 meter di Sulawesi",
+"Suatu penyakit yang disebut “Exercise-Induced Anaphylaxis” harfiah menyebabkan orang menjadi ‘alergi’ untuk berolahraga",
+"Pada Sept1909 malam hari, warga Jakarta beruntung menyaksikan Aurora Borealis di langit yg biasanya hanya di kutub ( Prof. Truls L Hansen)",
+"Bromelain yang terkandung dalam Nanas bila dikonsumsi berlebihan bagi wanita hamil bisa memicu kontraksi dini bahkan keguguran",
+"Secara resmi setiap tanggal 6 Oktober di Jepang merayakan Tom Cruise Day",
+"Jembatan suramadu (surabaya-madura) adalah jembatan terpanjang di Asia Tenggara (5438 m)",
+"Burung umumnya tidak berkicau apabila mereka hinggap di tanah (Hummingbirdworld)",
+"Orang sherpa di Nepal menganjurkan orang memakan bawang putih utk mencegah dan mengobati rasa tidak nyaman yg disebabkan ketinggian gunung",
+"Teka-teki silang terbesar yang pernah diterbitkan memiliki 2631 pertanyaan mendatar dan 2922 pertanyaan menurun",
+"Rafflesia Arnoldii yang tumbuh di Sumatera adalah bunga terbesar di dunia. Ketika bunganya mekar, diameternya mencapai 1 meter",
+"Tertawa dan bahagia meningkatkan imun, terutama produksi sel-sel pembunuh alamiah yang membantu melindungi tubuh dari penyakit",
+"Orang yang membayangkan suara baru yang belum pernah didengar, atau menggabungkan sebuah melodi matanya akan bergerak ke kir",
+"Kecoa kentut setiap 15 menit dan terus mengeluarkan gas metana (kentut) selama 18 jam setelah kematian",
+"Menara Eiffel dibangun oleh Alexandre Eiffel, dan sebagian besar biayanya ditanggung oleh dia",
+"Rata-rata orang di dunia jatuh cinta sebanyak 7 kali dulu sebelum ditakdirkan menikah",
+"Mengoleskan jeruk nipis dapat mencerahkan bagian lutut / siku yang hitam",
+"Ken Edwards seorang pria asal Inggris memegang rekor Guinness untuk makan 36 kecoa dalam 1 menit",
+"Energi yang dihasilkan oleh angin ribut (topan) selama 10 menit lebih besar dibandingkan energi dari bom saat perang",
+"Lagu kebangsaan Yunani mempunyai 158 bait",
+"Kata “depp” dalam bahasa Jerman artinya “idiot”",
+"Bobby Tufts (4 tahun) adalah Wali Kota termuda di dunia saat ini (Wali Kota Dorset, Minnesota, AS)",
+"Menghisap rokok sambil makan cokelat dapat membunuh racun yang terdapat pada rokok tersebut. [penelitian kedokteran di Universitas Lampung]",
+"Di zaman penjajahan Belanda, hukuman orang yg berzina adlh ditangkap dan dicorengkan arang pd hidungnya. Inilah asal usul “Hidung Belang”",
+"Kebanyakan orang lebih percaya terhadap kemampuan kepemimpinan seseorang jika orang itu memiliki badan yang lebih tinggi. [inilah .com]",
+"Dalam setiap inci persegi permukaan smartphone terdapat skitar 25.107 kuman, artinya smartphone lebih kotor dr kloset. [Laporan dr Proporta]",
+"Kebiasaan sibuk memotret dan mengunggah foto makanan di sosial media, beresiko seseorang menjadi gendut. [Dr. Valerie Taylor]",
+"Anak yang gemar berolahraga lebih cerdas dibandingkan yang tidak. [penelitian di Michigan State University]",
+"Kelurahan Air Jamban adalah nama kelurahan di kecamatan Mandau, kabupaten Bengkalis, provinsi Riau, Indonesia",
+"Kata “Poli” berarti Banyak dan “Tics” berarti Makhluk Pengisap Darah. Jadi kata Politics (politik) berarti Banyak Makhluk Pengisap Darah",
+"Musik dapat membuat otak bahagia dan kebanyakan mendengarkan musik dapat membuat perut cepat lapar",
+"Mendengarkan musik irama lambat saat tidur terbukti mampu meningkatkan kemampuan memori otak. [penelitian di Universitas Tubingen Jerman]",
+"Pulau Giliyang di Sumenep, Jawa Timur disebut sbg pulau “Awet Muda” karena pulau ini memiliki kandungan oksigen terbaik di dunia. [tempo co]",
+"Morology / Morologi adalah studi tentang percakapan konyol.",
+"Hormon Cinta hanya bertahan 4 tahun, sisanya dorongan seks. [penelitian di University of Mexico]",
+"Letusan gunung Tambora mengilhami penemuan sepeda, karena bnyk hewan transportasi menjadi mati akibat dr prubahan cuaca yg ekstrem saat itu",
+"Tertawa sebanyak 100 kali setara dengan mendayung selama 10 menit. [Dr William Fry dari Stanford Medical School]",
+"Studi menunjukkan penggemar musik heavy metal ternyata lebih bisa meredam emosi negatif dan lebih ekspresif. [Sciencedaily]",
+"Orang yang terlalu sering begadang memiliki performa otak seperti 7 tahun lebih tua dari usia aslinya. [dailymail.",
+"Di Italia, dalam aturannya minuman Cappuccino hanya boleh di minum sebelum waktu siang",
+"Hormon Cinta hanya bertahan 4 tahun, sisanya dorongan seks. [penelitian di University of Mexico]",
+"Letusan gunung Tambora mengilhami penemuan sepeda, karena bnyk hewan transportasi menjadi mati akibat dr prubahan cuaca yg ekstrem saat itu",
+"Tertawa sebanyak 100 kali setara dengan mendayung selama 10 menit. [Dr William Fry dari Stanford Medical School]",
+"Studi menunjukkan penggemar musik heavy metal ternyata lebih bisa meredam emosi negatif dan lebih ekspresif. [Sciencedaily]",
+"Orang yang terlalu sering begadang memiliki performa otak seperti 7 tahun lebih tua dari usia aslinya. [dailymail]",
+"Koin ¥ 1 (Yen Jepang) bisa mengapung di atas air",
+"Di Cape Town, Afrika Selatan, remaja laki-laki yang memiliki gigi ompong dianggap tampan / maskulin",
+"Memeluk orang yg disayangi dpt membantu menurunkan tekanan darah, mengurangi stres dan kecemasan, bahkn dpt meningkatkan memori. [Dailymail]",
+"Kata “Mouse” (tikus) berasal dari turunan Bahasa Sansekerta “Mus” yang berarti “pencuri”. 48. Berjalan kaki atau bersepeda ke sekolah mempertajam konsentrasi siswa di kelas dan tetap bertahan sekitar 4 jam kemudian. [Medical Daily]",
+"Menurut riset pasar global Euromonitor International, pria Korea adalah pria yang paling suka bersolek dari pria lain di dunia",
+"Rata-rata orang akan merasa 100 persen sehat / fit hanya 61 hari dalam setahun. [penelitian di Inggris]",
+"Polydactyl Cat adalah jenis kucing yang memiliki jempol di kaki mereka",
+"Hanya dengan mengurangi brightness dari televisi, anda mampu berhemat lebih dari Rp 1,5 juta setahun. [kompas]",
+"Di Jerman, tahanan yg ingin meloloskan diri dr penjara adl bukan mrupakn perbuatan ilegal. Krn itu salah1 naluri dasar manusia untuk kebebasan",
+"Wanita merasa diri mereka terlihat paling jelek dan terlihat lebih tua pada hari Rabu pukul 15.30.  [studi baru dari St Tropez] Expand",
+"Orang yang rutin bermain video game ternyata memiliki penalaran yang baik dibanding kebanyakan orang (detikHealth)",
+"Nama “Gorila” berasal dari kata Yunani “Gorillai” yang berarti “perempuan berbulu”",
+"IBM mengatakan bahwa dalam kurun waktu 5 tahun ke depan, komputer bakal mirip manusia yang bisa melihat, mendengar, mencium dan merasakan",
+"Selama abad ke-13, kata “nice” sebenarnya berarti “stupid”, “senseless” dan “foolish”",
+"49% dari pemilik Smartphone adalah jomblo. (Survei, “2012 Online User Behavior and Engagement Study”)",
+"Gazzarella adalah keju mozzarella yang terbuat dari susu kucing. 61. Rata-rata orang melihat / mengecek ponselnya sekitar 150 kali sehari. (Laporan Nokia pada MindTrek 2010)",
+"Tertawa dapat meningkatkan aktivitas antibodi sekitar 20%, juga membantu untuk menghancurkan virus dan sel-sel tumor",
+"Fobia matematika (mathematics anxiety) memicu respon yang sama di otak sbg rasa sakit fisik. Gejalanya yaitu melihat angka saja sudah nyeri",
+"Karakter kartun Bugs Bunny diberi pangkat kehormatan sersan-mayor di Korps Marinir AS pada akhir Perang Dunia II. (wikipedia)",
+"Menurut etiket internasional, sebuah jabat tangan yang tepat dan baik harus berlangsung selama sekitar 3 detik & dilepaskan setelah goyang",
+"Ketika kita sedang jatuh cinta, otak akan memproduksi dopamin ekstra, bahan kimia yang membuat seseorang menjadi gembira berlebihan",
+"“Mwahahaha” dan “lolz” telah ditambahkan ke Kamus Inggris Oxford",
+"Menurut penelitian, pria cenderung menurunkan volume suaranya ketika ia berbicara dg seseorang yg ia cintai, sementara perempuan sebaliknya",
+"Di Perancis, jajanan Arum Manis (Rambut Nenek) disebut “Barbe á Papa” yang berarti “Jenggot Ayah”",
+"Menurut penelitian, PR terlalu banyak sebenarnya dapat menyebabkan siswa menjadi stres, depresi & mendapat nilai lebih rendah",
+"Hangry adalah penggabungan kata dari “Hungry” dan “Angry”, di pakai ketika anda sedang lapar dan marah",
+"Kentut dari bakteri membuat keju swiss memiliki lubang-lubang",
+"Orang yang merasa kesepian memiliki kemungkinan mengalami kepikunan 70-80% lebih tinggi. (Journal of Neurosurgery Neurologi and Psychiatry)",
+"Mendengarkan musik benar-benar dapat mengurangi rasa sakit kronis hingga 20% dan membantu meringankan depresi hingga 25%. (sciencedaily)",
+"Tanduk badak terbuat dari keratin",
+"Jerapah memiliki lidah sepanjang 21 inchi",
+"Sepeda pertama dibuat pada tahun 1817 dibuat tanpa pedal",
+"Rechendorfer Yusuf adalah orang pertama yang berhasil menempatkan karet penghapus di atas sebuah pensil",
+"Balon mainan yang pertama kali terbuat dari karet vulkansir",
+"Satu ujung pensil dapat menulis 50.000 kata dalam bahasa Inggris",
+"Terdapat hampir 900 jenis kelelawar di dunia",
+"Tangan kanan orang hidup lebih lama dari tangan kiri",
+"Banyak orang yang dibunuh oleh keledai",
+"Seekor buaya tidak dapat mengeluarkan lidah",
+"Semut tidak tidur",
+"Beruang kutub bertangan kidal",
+"Astronot tidak diperbolehkan untuk makan kacang-kacangan sebelum mereka pergi ke ruang angkasa karena buang angin/kentut dalam pakaian ruang angkasa mengakibatkan kerusakan",
+"Dengan menaikkan kaki Anda perlahan dan berbaring ke belakang, Anda tidak dapat terperosok ke dalam pasir",
+"Pemogokan cahaya di bumi sekitar 6.000 kali per menit",
+"Lobster memiliki darah biru",
+"Seorang pria mengatakan rata-rata 4.850 kata dalam 24 jam",
+"Kuku ibu jari tumbuh lambat dan kuku jari tengah yang tercepat",
+"Kecap sebelumnya dijual sebagai obat",
+"Cokelat dapat membunuh anjing",
+"Produk pertama yang memiliki barcode adalah Wrigley’s gum",
+"Kanada dalam bahasa India berarti Desa Besar",
+"Seseorang menghasilkan 100 pound sel darah merah dalam hidupnya",
+"Pita karet terpanjang adalah di kulkas",
+"Ada 293 cara untuk menukar dolar",
+"“Dreamt” adalah satu-satunya kata yang berakhir dengan ‘mt’",
+"Orang yang cerdas memiliki kadar seng dan tembaga di rambut mereka",
+"69% orang Amerika menggunakan internet dan hanya 5,5% dari India",
+"Plastik dibutuhkan 500 tahun untuk terurai",
+"Amerika telah memiliki 30,30% bandara di dunia & India hanya 0,70%",
+"Total wilayah permukaan bumi adalah 197 juta mil persegi",
+"Cahaya matahari mencapai bumi membutuhkan waktu sekitar 8 jam 3 detik",
+"Penduduk di dunia telah meningkat 3,1 miliar dalam 40 tahun terakhir",
+"Sekitar 180 juta kartu Valentine tersebar per tahunnya",
+"Orang yang berusia di atas 100 di AS meningkat dari 4.000 pada tahun 1960 menjadi 55.000 pada tahun 1995",
+"Seekor kucing dapat berlari 20 km per jam",
+"Seekor cheetah dapat berlari 76 km per jam",
+"Katak yang terbesar di dunia adalah Goliath Frog",
+"Tidak ada dua zebra yang belangnya serupa",
+"Terdapat hampir 50 jenis kangguru",
+"Joeys adalah nama yang diberikan kepada anak kanguru",
+"Woodpecker dapat mematuk 20 kali dalam satu menit",
+"Lidah seekor Chameleon adalah dua kali panjang tubuhnya sendiri",
+"10% dari populasi dunia adalah tangan kiri",
+"Pada abad pertengahan di Eropa, garam sangat mahal harganya, sehingga disebut sebagai “emas putih”",
+"Mengunyah permen karet dapat meningkatkan kemampuan berpikir cepat dan kewaspadaan hingga 10 persen. [Jurnal Brain and Cognition]",
+"Wanita yang sedang stres selama kehamilannya cenderung melahirkan anak-anak yang pemarah. [Institute of Psychiatry, King College London]",
+"Disarankan supaya membeli sepatu pada sore hari. Sebab, setelah seharian berjalan, di sore hari kaki akan membesar 5-8 persen",
+"Musik memiliki kemampuan untuk memperbaiki kerusakan otak serta mengembalikan kenangan yang hilang. [cracked .com]",
+"Perbandingan jumlah rayap dan manusia di dunia adalah 10 :",
+"Ayam yang sudah terpenggal lehernya masih mampu lari sepanjang lapangan bola sebelum benar-benar mati",
+"Berdiri lama tanpa menekuk lutuk sama sekali akan membuat kita pingsan",
+"Kuda Nil kentut lewat mulut",
+"Pohon kelapa membunuh 150 orang tiap tahun, lebih banyak daripada hiu",
+"Jika kita memelihara ikan mas dalam ruangan yang gelap, warnanya akan berubah putih",
+"Tikus beranakpinak sangat cepat dan dalam waktu 18 bulan, dua tikus dapat memiliki lebih dari 1 juta keturunan",
+"Kita bernafas kira-kira 23.000 kali setiap hari",
+"Tahukah anda? Llanfairpwllgwyngyllgogerychwyrndrobwlll, adalah nama sebuah desa di Wales Utara, Inggris. Sulit dibaca bukan?",
+"Ada sekitar 10ribu jenis apel di dunia Kutu rambut sebenarnya lebih suka hidup di kulit kepala yang bersih dari pada yang kotor",
+"Umur dari capung adalah 24 jam",
+"Pria kehilangan 40 helai rambut tiap hari. wanita 70 helai",
+"Jika bersin terlalu keras dapat meretakkan tulang iga. JIka mencoba menahan bersin, bisa mengalami pecah pembuluh nadi di kepala dan leher trus mati . jika memaksa mata terbuka saat bersin, bola mata bisa meloncat keluar",
+"Kalajengking bisa dibunuh dengan menyiramnya dengan cuka,mereka akan murka dan menyengat dirinya sendir",
+"Kentut sapi termasuk penyebab utama global warming",
+"Gerakan Bruce Lee sangat cepat sehingga mereka harus melambatkan film agar kita bisa melihat semua gerakannya",
+"Siput bisa tidur selama 3 tahun",
+"Jika kita berdiri di dasar sumur, kita bisa melihat bintang walaupun di siang hari",
+"Tehnik mengaduk terbaik bukan dengan gerakan memutar, tapi dengan gerakan huruf W",
+"Tiap tahun, bulan menjauh 3.82 cm dari bumi",
+"Riset membuktikan, memakan pisang bisa menambah daya ingat",
+"Orang yang alergi bahan latex, biasanya alergi kiwi juga",
+"Ilmu tentang perkembangan apel disebut Pomology",
+"Kita bisa mematangkan Mangga dengan cepat dengan cara memasukkan ke dalam paperbag bersama dengan pisang matang",
+"Antioksidans pada apel lebih besar 5x dari pisang",
+"Hanya 1 dari 5 orang australia makan apel tiap hari",
+"Kiwi memiliki nama lain Chinese Gooseberry",
+"Mangga masih 1 family dengan tanaman Poison Ivy",
+"Pelaut inggris mengonsumsi air jeruk nipis untuk menghindari mabuk laut",
+"Pelaut inggris disebut juga Limeys karena suka minum air jeruk nipis",
+"Nanas mengandung Bromelain yang berguna mencegah bir dingin berawan",
+"Kutu rambut sebenarnya lebih suka hidup di kulit kepala yang bersih dari pada yang kotorUmur dari capung adalah 24 jam",
+"1 pohon apel rata2 bisa menghasilkan 500buah apel",
+"25% kandungan dalam apel adalah Udara. makanya apel bisa mengapung",
+"Lebih dari 60juta Ton apel dihasilkan di dunia per periode tertentu",
+"Kiwi ditetapkan sebagai buah kebangsaan di Cina",
+"Pear akan berubah menjadi hitam sekali jika disimpan pada lingkungan yang kurang oksigen",
+"Markisa pertama kali ditemukan di Brazil",
+"Riset membuktikan bahwa makan apel bisa mengurangi risiko kena kanker",
+"Biji apel merupakan racun ringan namun tidak berbahaya bagi manusia",
+"Jeruk adalah buah yang paling umum di dunia",
+"Beberapa negara di dunia melatih bangsa monyet untuk memetik kelapa",
+"Ada lebih dari 400jenis kiwi di Cina",
+"Bahasa gaul di australia “She’s Apple” bukan berarti “Dia (wanita) manis” tetapi berarti “Semuanya baik2 saja”",
+"Nanas yang belum matang adalah racun",
+"Kiwi memiliki nama asli Yang Tao (Sunny Peach)",
+"Makan pisang ketika makan nasi dapat membantu ibu hamil terhindar dari Morning Sickness",
+"Plum jepang sebenarnya berasal dari Cina",
+"Plum bisa tumbuh di semua benua kecuali antartika",
+"Memerlukan tenaga 50lembar daun untuk menghasilkan 1buah apel dalam 1pohon",
+"Makan plum membantu meningkatkan penyerapan zat besi dalam tubuh",
+"Anggur dapat meledak jika dimasukkan ke dalam microwave",
+"Pisang mengandung vitamin B6 yang bisa mengontrol kadar gula dalam darah, dan membangkitkan mood",
+"1nanas bukan 1buah, tetapi terdiri atas lebih dari 200anak buah (fruitlets)",
+"Jeruk nipis tidak mengandung segala jenis lemak, natrium, dan kolestrol",
+"Menanam semangka dalam kotak akan menghasilkan semangka kotak",
+"Dilihat dari beratnya, semangka adalah buah yang paling diminati di USA",
+"Pohon kelapa entah kenapa disebut “Tree of Life”",
+"Bunga pohon markisa adalah Bunga kebangsaan negara Paraguay",
+"Semangka adalah sepupunya Terong, Labu, dan Squash",
+"Menanam 1biji buah jeruk bisa menghasilkan lebih dari 1 pohon",
+"Bagian dalam kulit pisang bisa untuk menyemir sepatu kulit",
+"Bagian dalam kulit pisang juga bisa digunakan untuk menghilangkan gatal bekas gigitan nyamuk dengan cara menggosokkannya",
+"Di Kerala, India selatan, Bunga kelapa digunakan untuk upacara Pernikahan",
+"Kulit Plum dipercaya memiliki efek Laxative",
+"Pisang kaya akan vitamin B-Complex yang bisa menenangkan sistem saraf",
+"Tidak ada yang se-rima dengan “orange” (jeruk)",
+"Salah satu spesies markisa yang buahnya berwarna ungu bisa melakukan fertilisasi sendiri",
+"Pisang bisa meningkatkan kadar Serotonin yang bisa melawan depresi",
+"Semakin besar “Navel” pada Jeruk Navel, semakin manis buahnya",
+"Markisa yang berkerut adalah markisa yang paling manis",
+"Radiasi dari 1 batang rokok sama dgn radiasi 2000x X-ray",
+"Sepatu boot awalnya dikhususkan untuk berperang",
+"Sebelum Masehi bahasa inggrisnya adalah B.C (Before Christ). Setelah Masehi adalah A.D (Anno Domini)",
+"Ikan hiu kehilangan gigi lebih dari 6000buah setiap tahun, dan gigi barunya tumbuh dalam waktu 24 jam",
+"Julius Caesar tewas dengan 23 tikaman",
+"Nama mobil Nissan berasal dari bahasa jepang Ni : 2 dan San : 3. Nissan : 23",
+"Jerapah dan tikus bisa bertahan hidup lebih lama tanpa air dari pada unta",
+"Perut memproduksi lapisan lendir setiap dua minggu agar perut tidak mencerna organnya sendiri",
+"98% dari perkosaan dan pembunuhan dilakukan oleh keluarga dekat atau teman korban",
+"Semut dapat mengangkat beban 50 kali tubuhnya",
+"Deklarasi Kemerdekaan Amerika ditulis diatas kertas marijuana",
+"Titik diatas huruf i disebut ‘title’",
+"Sebutir kismis yang dijatuhkan kedalam gelas berisi sampanye segar akan bergerak naik turun dalam gelas",
+"Benjamin Franklin anak bungsu dari orangtua bungsu keturunan ke 5 dalam keluarga bungsu",
+"Triskaidekaphobia adalah ketakutan pada 13. Paraskevidekatriaph obia adalah ketekukan pada hari jumat tanggal 13 (bisa terjadi antara 1-3 kali setahun). di Italia, 17 adalah angka sial di Jepang angka sial adalah 4",
+"Lidah jerapah panjangnya sekitar 50 cm",
+"Mulut menghasilkan 1 liter ludah setiap hari",
+"Kita bernafas kira-kira 23.000 kali setiap hari",
+"Kata ZIP (kode pos) adalah kepanjangan dari ‘Zoning Improvement Plan’",
+"Coca-Cola mengandung Coca (yang merupakan zat aktif pada kokain) dari tahun 1885 sampai 1903",
+"Rata-rata kita bicara 5000 kata tiap hari (walaupun 80% nya kita bicara pada diri sendiri)",
+"Seandainya kuota air dalam tubuh kita berkurang 1%, kita langsung merasa haus",
+"4 simbol raja pada kartu remi melambangkan 4 raja yang etrkenal di jaman masing-masing: Sekop = David/Raja Daud ; Keriting = Alexander the Great/Iskandar Agung ; Hati = Charlemagne/ Raja Prancis ; Wajik =Julius Caesar",
+"Seumur hidup kita meminum air sebanyak kurang lebih 75.000 liter",
+"Setiap orang, termasuk kembar identik, sidik jari dan tekstur lidahnya tidak ada yang sama",
+"Titik merah pada 7-Up logo berasal dari penemunya yang bermata merah. Dia seorang albino",
+"Pria kehilangan 40 helai rambut tiap hari. wanita 70 helai",
+"Tanda ’save’ pada Microsoft Office programs menunjukan gambar floppy disk dengan shutter terbalik",
+"Albert Einstein dan Charles Darwin,keduanya menikah dengan sepupu pertama mereka (Elsa Löwenthal dan Emma Wedgewood)",
+"Unta punya 3 kelopak mata",
+"Sehelai rambut di kepala kita mempunyai masa tumbuh 2 sampai 6 tahun sebelum diganti dengan rambut baru",
+"Seseorang masih akan sadar selama 8 detik setelah dipenggal",
+"Otot yang bekerja paling cepat ditubuh kita adalah otot dikelopak mata yang membuat kita berkedip. kita bisa berkedip 5kali dalam sedetik",
+"Coklat dapat membunuh anjing,karena langsung mempengaruhi jantung dan susunan syarafnya",
+"Tanpa dicampur ludah di dalam mulut, kita tidak akan merasakan rasa makanan",
+"Kuku jari tangan tumbuh 4kali lebih cepat daripada kuku kaki",
+"13% orang di dunia adalah kidal",
+"Hampir semua lipstik mengandung sisik ikan",
+"Bayi yang baru lahir berat kepalanya 1/4 dari berat tubuhnya",
+"Kita sebenarnya melihat dengan otak. mata hanya berupa kamera yang mengirim data ke otak. 1/4 bagian dari otak digunakan untuk mengatur kerja mata",
+"Kalajengking bisa dibunuh dengan menyiramnya dengan cuka,mereka akan murka dan menyengat dirinya sendiri",
+"Tahun 1830an saus tomat biasa dijual sebagai obat",
+"Tiga monyet bijak punya nama: Mizaru (See no evil), Mikazaru (Hear no evil), and Mazaru (Speak no evil)",
+"India mempunyai Undang-undang hak untuk sapi",
+"Jika bersin terlalu keras dapat meretakkan tulang iga. JIka mencoba menahan bersin, bisa mengalami pecah pembuluh nadi di kepala dan leher trus mati . jika memaksa mata terbuka saat bersin, bola mata bisa meloncat keluar",
+"Nama negara Filipina berasal dari nama Raja Phillip",
+"Saudi Arabia berasala dari nama Raja Saud",
+"Anak-anak mempunyai 20 gigi awal. Orang dewasa punya 32",
+"Karena langkanya logam, piala Oscars yang dibagikan pada perang dunia ke II terbuat dari kayu",
+"Setiap Siklus 11 tahun, kutub magnet pada matahari bertukar tempat. Siklus ini dinamakan “Solarmax”",
+"Ada 318,979,564, 000 kemungkinan kombinasi pembukaan pertama pada catur",
+"Ada lebih dari 300 bakteri pembentuk karang gigi",
+"Macan adalah anggota terbesar dalam keluarga kucing",
+"Nomer “172? dapat ditemukan pada uang kertas 5 dollar amerika, pada gambar semak-semak dibawah Lincoln Memorial",
+"Pohon kelapa membunuh 150 orang tiap tahun. Lebih banyak daripada hiu",
+"Pada poster film ‘Pretty Woman’ Julia Robets terlalu pendek untuk bisa sejajar dengan Richard Gere. Maka digunakan model Shelley Michelle sebagai tubuh Julia",
+"Daerah kutub kehilangan matahari selama 186 hari dalam setahun",
+"Kode Telephone Internasional untuk Antartica adalah 672",
+"Bom pertama sekutu dijatuhkan di Berlin pada perang dunia ke II. Membunuh satu-satunya gajah di Kebun Binatang Berlin",
+"Rata-rata hujan jatuh dengan kecepatan 7 mil per jam",
+"Butuh 10 tahun bagi Leonardo Da Vinci untuk melukis Mona Lisa. Lukisan itu tidak ditandai dan di beri tanggal. Leonardo dan Mona mempunya susunan tulang yang persis sama dan menurut sinar X, ada 3 versi lukisan dibawah lukisan itu",
+"Nama dari kembar gemini adalah Castor dan Pullox",
+"Gerakan Bruce Lee sangat cepat sehingga mereka harus melambatkan filam agar kita bisa melihat semua gerakannya",
+"Satu kilo dari berat badan kita mengandung 7000 kalori",
+"Darah sama kental dengan air laut",
+"Air laut di samudra Atlantik lebih asin dari pada di samudra Pasifik",
+"Topeng tokoh Michael Myers di film horor ‘Helloween’ sebenernya topeng tokoh Captain Kirk (Star Trek) yang di cat putih, karena kurang dana",
+"Nama asli butterfly (kupu-kupu) adalah flutterby",
+"Bayi lahir setiap 7 detik",
+"Satu dari 14 wanita Amerika berambut pirang asli. Prianya hanya satu dari 17",
+"The Olympic adalah saudara dari kapal Titanic, dan melayani dengan selamat selama 25 tahun",
+"Saat Titanic karam, 2228 orang ada di dalamnya. Hanya 706 yang selamat",
+"Di Amerika, seseorang didiagnosa menderita AIDS tiap 10 menit. Di Afrika, seseorang meninggal karena AIDS tipa 10 menit",
+"Sampai usia 6 bulan, bayi bisa menelan dan bernapas secara bersamaan. Orang dewasa tidak bisa",
+"Alasan kenapa diiklan jam kebanyakan jarum menunjuk pukul 10.10, karena jam seperti sedang tersenyum",
+"Tiap tahun bulan menjauh 3.82 cm dari bumi",
+"Saat kita bertahan hidup dan tidak ada bahan makanan, sabuk kulit dan sepatu keds adalah makanan terbaik untuk dimakan karena mengandung cukup gizi untuk hidup sementara",
+"Dalam satu tetes air mengandung 50 juta bakteri",
+"Dengan menaikan kaki pelan2 dan berbaring tenang dengan punggung lurus, kita tidak akan tenggelam di pasir hisap",
+"Satu dari 10 orang hidup di suatu pulau",
+"Memakan seledri membuang kalori lebih banyak dari pada kalori yang terkandung dalam seledri itu sendiri",
+"Lobster dapat hidup selama 100 tahun",
+"Permen karet tidak dijual di Disney Land",
+"Mangunyah permen karet saat mengupas bawang mencegah kita menangis",
+"Rahang kucing gak bisa bergerak kekiri dan kanan",
+"Nama Artic (kutub utara) berarti beruang dalam bahasa Yunani (Arktos), dan memang beruang kutub hanya ada di kutub utara",
+"Jika kira berdiri di dasar sumur, kita bisa melihat bintang walaupun di siang hari",
+"Suara yang kita dengar dari dalam kerang bukan suara ombak laut, tapi suara aliran darah dalam kepala kita",
+"Orang kebanyak yang menderita ketakutan pada ruang terbuka (kenophobia) daripada ketakukan pada ruang tertutup (claustrophobia) ",
+"Tehnik mengaduk terbaik bukan dengan gerakan memutar, tapi dengan gerakan huruf W",
+"Adegan band yang terus bermain musik saat Titanic tenggelam adalah kisah nyata",
+"Buku Guinness Book of Records memegang rekor sebagai buku yang paling banyak dicuri dari perpustakaan",
+"35% dari orang yang ikut kontak jodoh lewat internet, sudah menikah",
+"CocaCola dulu berwarna hijau",
+"Secara fisik, babi tidak bisa melihat ke langit",
+"Semua beruang kutub kidal",
+"Kelelawar selalu belok kiri jika terbang keluar gua",
+"Jim Henson pertama kali memakai kata “Muppet”. Kombinasi dari “marionette” dan “puppet”",
+"Gajah satu-satunya hewan yang tidak bisa meloncat",
+"The Michelin man (figur berbaju dan bertopi putih diiklan Michelin) bernama Mr. Bib. nama aslinya Bibendum pada iklan pertama tahun 1896",
+"Kita tidak bisa menjilat siku kita sendiri",
+"Kata “lethologica” menggambarkan saat dimana kita tidak bisa mengingat apa yang kita inginkan",
+"Sekitar 14% pecandu yang menggunakan jarum suntik, positif HIV",
+"Kalimat yang bisa dibaca sama dari depan dan belakang (racecar, kayak, tamat) disebut “palindrome” ",
+"Siput bisa tidur selama 3 tahun",
+"Diatas khatulistiwa melintas sekitar 200 satelit asing, termasuk satelit mata-mata",
+"Orang di Cina lebih banyak yang berbahasa Inggris dari pada orang di Amerika",
+"Karena pengaruh rotasi bumi, kalau kita melempar kearah barat, lemparan kita akan lebih jauh jatuhnya dari pada kearah timur",
+"Satu dari 9000 orang menderita albino",
+"Kursi listrik ditemukan oleh seorang dokter gigi",
+"Kita berulang tahun bersama 9 juta orang dari seluruh dunia",
+"Setiap manusia dalam hidupnya rata-rata habis untuk menunggu dilampu merah selama 2 minggu",
+"Botol aqua dan tempat makan plastik baru bisa terurai dengan sempurna dalam tanah setelah 50.000 tahun",
+"Kucing bisa membuat lebih dari 100 bunyi vokal, anjing hanya bisa sekitar 10",
+"Gigi berang-berang tak pernah berhenti ",
+"Kelelawar adalah satu-satunya mamalia yang bisa terbang",
+"Jika boneka Barbie adalah manusia, ukurannya adalah 39-23-33 (99-58,5-84 cm). Tingginya sekitar 215 cm dan punya leher 2kali lebih panjang daripada manusia normal",
+"Tikus beranakpinak sangat cepat dan dalam waktu 18 bulan, dua tikus dapat memiliki lebih dari 1 juta keturunan",
+"Memakai Headphone selama 1 jam dapat mengembangbiakan bakteri dalam kuping 700 kali lebih cepat",
+"Seekor Babon bernama ‘Jackie’ menjadi prajurit resmi dalam angkatan bersenjata Afrika Selatan pada Perang Dunia I",
+"Bibliophile adalah sebutan untuk kolektor buku-buku langka. Bibliopole adalah penjual buku-buku langka",
+"Jantung ikan paus biru berdenyut 9 kali dalam semenit",
+"Arabic numerals bukan berasal dari Arab, tapi diciptakan di India",
+"Kupu-kupu melihat dengan 12000 mata",
+"Bulan February tahun 1865 adalah satu-satunya bulan dalam catatan sejarah yang tidak sempat mengalami bulan purnama",
+"Ayam yang sudah terpenggal lehernya masih mampu lari sepanjang lapangan bola sebelum benar-benar mati",
+"Kecoak bisa hidup 9 hari tanpa kepala, dan akan mati karena kelaparan",
+"Di Bumi, satu tahun adalah 365 hari. Di planet Merkurius satu tahun adalah 2 hari",
+"Umur dari capung adalah 24 jam",
+"Pada Usia 3 bulan janin manusia mulai terbentuk sidik jari",
+"Butuh waktu 6 bulan untuk kuku kaki tumbuh dari bawah paling bawah sampai ujung kuku",
+"Daya ingat ikan hanya 3 detik",
+"Bulan purnama 9 kali tebih terang daripada bulan setengah",
+"Untuk setiap patung memorial orang diatas kuda, jika 2 kaki depan kuda mengangkat, maka orang tersebut tewas dalam pertempuran, jika satu kaki kuda yang terangkat, maka orang tersebut meninggal karena luka dalam pertempuran, jika 4 kakinya menginjak tanah, orang tersebut meninggal secara normal",
+"Beruang dewasa dapat lari secepat kuda",
+"Tulang kuda lebih banyak 18 buah dari tulang manusia",
+"Ubur-ubur terdiri dari 95% air",
+"Kulit Zebra adalah putih yang bergaris hitam",
+"Kecuali manusia dan monyet, semua mamalia buta warna",
+"Biji apel mengandung sianida",
+"Tikus dan kuda tidak bisa muntah",
+"Penguin adalah burung yang tidak bisa terbang tapi bisa berenang",
+"Astronot dilarang mengkonsumsi kacang sebelum menjelajah ruang angkasa karena jika buang angin dalam baju khusus astronot dapat membahayakan mereka",
+"Winston Churchill lahir di toilet wanita saat acara dansa",
+"Sebelum ada pesawat jet, Jetlag disebut Boatlag",
+"Kucing berkeringat melalui telapak kakinya (terutama saat mendengar gonggongan anjing)",
+"Kucing tidak bisa merasakan rasa manis",
+"Coklat meleled dalam mulut karena titik lelehnya adalah 35 derajat celcius",
+"Dalam perang dahulu, orang yang buta warna dibutuhkan dalam tim pendeteksi kamuflase di militer",
+"Sapi tidak punya gigi atas",
+"Hedenophobic berarti takut akan kesenangan",
+"Pendeta Mesir kuno mencabuti setiap helai rambut dan bulu dari badan mereka",
+"Buaya tidak bisa menjulurkan lidah",
+"Kentut sapi termasuk penyebab utama global warming",
+"Semut selalu jatuh miring ke kanan jika diberi racun serangga",
+"Kucing rumah benci bau lemon dan semua yang berbau sitrus",
+"Donal Bebek dilarang beredar di Finlandia karena Donal tidak pakai celana",
+"Nama asli Donal bebek adalah Donald Flauntleroy Duck",
+"Indra perasa kupu-kupu ada dikakinya",
+"Dry Ice tidak meleleh, tapi menguap",
+"Mata burung unta lebig besar dari otaknya",
+"Bintang laut tidak punya otak",
+"Tiap manusia punya telinga yang berbeda",
+"Telur segar tenggelam diair, telur yang kadaluarsa mengambang",
+"80% dari seluruh binatang di dunia adalah serangga",
+"Kacang adalah salah satu bahan untuk membuat dinamit",
+"Ratu Elizabeth I menderita Anthophobia (takut akan mawar)",
+"RSVP adalah Respondez s’il Vous Plait yang artinya ‘mohon jawaban’",
+"Mata manusia yang sehat (tidak buta warna) dapat menbedakan 500 jenis warna abu-abu",
+"Ikan mas yang bunting disebut ‘twit’",
+"Eropa adalah benua tanpa padang pasir",
+"Lalat meloncat mundur saat akan terbang",
+"Sekeor kucing memiliki 32 otot pada tiap telinga",
+"A honeybee can fly at fifteen miles per hour",
+"Macan mempunyai kulit yang belang,bukan hanya bulu yang belang",
+"A “jiffy” is the scientific name for 1/100th of a second",
+"Hanya 3 malaikat, Gabriel, Michael dan Lucifer yang disebut dalam injil",
+"Kambing mempunya pupil mata segi empat",
+"Novel pertama yang menggunakan mesin tik adalah Tom Sawyer",
+"Hamster sangat suka makan jangkrik",
+"Pemantik ditemukan sebelum korek api",
+"Rata-rata dalam setiap batang permen coklat terdapat serangga yang meleleh bersamanya",
+"Tanduk badak terbuat dari rambutnya yang mengeras",
+"Perang paling singkat dalam sejarah adalah perang Zanzibar and England tahun 1896. Zanzibar menyerah setelah 38 menit",
+"Kutu rambut sebenarnya lebih suka hidup di kulit kepala yang bersih dari pada yang kotor",
+"Kulit beruang kutub sebenarnya hitam. Bulunya berwarna bening, dan tampak putih di salju",
+"Elvis mempunyai saudara kembar bernama Garon, yang meninggal saat lahir, maka nama tengah Elvi adalah Aron, untuk menghormati saudaranya",
+"Landak punya sidik jari yang mirip manusia",
+"Kuda Nil kentut lewat mulut",
+"Shakespeare yang menemukan kata “assassination” dan “bump”",
+"Mahluk yang bisa tersipu-sipu hanya manusia",
+"Jika kita memelihara ikan mas dalam ruangan yang gelap, warnanya akan berubah putih",
+"Wanita berkedip dua kali lebih banyak dari pria",
+"Nama Jeep (jip) diampil dari singkatan “GP”, bahasa militer untuk General Purpose",
+"Orang yang menggunakan tangan kanan, kira-kira, 9 tahun lebih panjang umur dari orang kidal",
+"Jika semua emas dalam laut ditambang, setiap manusia didunia bisa mendapat emas 20 kg masing2",
+"Jika lever manusia berhenti bekerja, manusia akan mati dalam 8 samapai 24 jam",
+"Seorang “quidnunc” adalah sebutan untuk orang yang selalu ingin tahu gosip terbaru",
+"Jika matahari tiba-tiba padam, butuh 8 menit bagi manusia untuk menyadarinya",
+"Leonardo Da Vinci yang menemukan gunting, helikopter, dan banyak alat lainnya",
+"Dalam 4000 tahun, tidak ada jenis binatang peliharaan baru",
+"25% dari tulang manusia ada di kaki",
+"David Sarnoff adalah orang yang menerima sinyal Titanic dan meyelamatkan ratusan nyawa. Dia akhirnya menjadi kepala jaringan radio, the National Broadcasting Company (NBC)",
+"Kira-kira 100 orang tersedak ballpoint tiap tahun",
+"Jika kita terkunci diruang yang kedap udara, kita aka lebih dulu mati keracunan co2 dari pada kekerangan o2",
+"Jika kita kehilangan satu mata, kita akan kehilangan 1/5 dari pengelihatan kita dan kehilangan seluruh persepsi tentang kedalaman objek",
+"Berdiri lama tanpa menekuk lutuk sama sekali akan membuat kita pingsan",
+"Bawang putih yang kita gosok di tumit kaki akan meresap dapat dapat tercium dalam nafas kita",
+"Dengan merentangkan kedua tangan sejauh mungkin, jarak dari kedua ujung tangan adalah sama dengan tinggi kita",
+"Liburan selama sebelas hari berarti kita punya waktu hampir sejuta detik untuk menikmatinya",
+"Dalam film Silence of The Lambs, tokoh Hannibal Lecter tidak pernah berkedip",
+"Di jepang, warung kopi disebut ‘Kissaten’",
+"Merebus telur burung unta butuh waktu 40 menit",
+"Jaguar takut pada anjing",
+"Gajah hanya tidur 2 jam dalam sehari",
+"Johnny Deep takut pada badut",
+"Ganymede adalah bulan planet Jupiter, merupakan bulan terbesar di tata surya kita, lebih besar dari planet Merkurius",
+"Dalam golf, ‘Bo Derek’ adalah istilah untuk nilai 10",
+"Koala punya dua jempol",
+"Latte dalam bahasa Italia adalah susu",
+"Llanfairpwllgwyngyl lgogerychwyrndro bwlll… adalah nama sebuah desa di Wales Utara, Inggris",
+"Di Italia, Micky Mouse lebih dikenal dengan nama ‘ Topolino’",
+"Susu sebenarnya lebih menyerupai makanan daripada minuman",
+"Ada lebih dari 450 jenis susu di dunia. 240 berasal dari Prancis",
+"Nyamuk lebih suka anak-anak daripada orang dewasa",
+"Partikel debu didalam rumah sebagian besar berasal dari sel kulit mati",
+"Rat-rata orang bergerak 40 kali dalam tidurnya",
+"Dalam bahasa Inggris, ‘Naked’ artinya tanpa perlindungan. ‘Nude’ artinya telanjang",
+"Broccoli dan kembang kol adalah sayuran yang berupa bunga",
+"Anak baru lahir memiliki 350 tulang. Mereka menyatu atau menghilang sampai menjadi 206 pada usia 5 tahun",
+"Tidak ada bukti yang pasti siapa yang membangun Taj Mahal",
+"Dalam survey terhadap 200000 burung unta selama 80 tahun, tidak ada satupun yang mengubur kepalanya dalam tanah",
+"Nail Amstrong melangkah pertama kali di bulan dengan kaki kiri",
+"Shuttlecock untuk badminton harus punya 14 bulu",
+"Mutiara bisa larut dalam cuka",
+"Babi tidak dapat berkeringat karena tidak punya kelenjar keringat. Mereka berlumur lumpur untuk mendinginkan kulitnya",
+"Venus dan Uranus adalah planet di tata surya kita yang berputar melawan jarum jam. Jadi matahari terbit dari barat di planet ini",
+"Microwave ditemukan setelah seorang ilmuan yang berjalan melewati tabung radar mendapati permen coklatnya meleleh disakunya",
+"Ikan hiu kebal terhadap kanker",
+"Rusa Santa bernama: Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, dan Blitzen",
+"Beberapa jenis cacing pita akan memakan dirinya sendiri jika kelaparan",
+"Kita bisa menghela sapi naik tangga, tapi tidak bisa menghela mereka turun tangga",
+"Plakat yang ditinggalkan Apollo 11 di bulan berbunyi “Here men from the planet Earth first set foot upon the Moon July 1969, A.D. / WE CAME IN PEACE FOR ALL MANKIND",
+"Alpabet Hawai terdiri dari 12 huruf saja",
+"Nama paling populer di dunia adalah Muhammad",
+"Bola mata kita beratnya sekitar 28 gram",
+"Paru-paru kiri lebih kecil dari paru-paru kanan karena memberi tempat terhadap jantung",
+"Pinguin hanya ada di kutub selatan, dan tidak bisa menyebrangi equator",
+"Kebanyakan orang bisa mendengar lebih baik dengan kuping kanan",
+"Vitamin pada buah biasanya terdapat pada kulitnya",
+"Rata-rata klakson mobil berbunyi pada nada F",
+"Pria lebih mampu membaca tulisan dengan ukuran huruf kecil daripada wanita", 
+"Negara Indonesia berada di posisi ke-4 sebagai Negara Terindah di Dunia versi situs First Choice.",
+"Di Italia, dalam aturannya minuman Cappuccino hanya boleh di minum sebelum waktu siang.",
+"AS, Australia, Finlandia, Jerman dan Kanada adl negara maju tanpa UN. Tahukah anda sekolah trbaik di dunia ada di Finlandia walau tanpa UN.",
+"","\"Jengkol is very nice\" komentar Pierre Bouvier vokalis Simple Plan.",
+"Tiap satu kali jari kita mengklik mouse komputer, ada 1,42 kalori yang terbakar dalam tubuh. (Penelitian, Convert Anything to Calories).",
+"Di Jepang kuno, prajurit diolesi minyak kodok pada tubuh mereka dengan keyakinan bahwa hal itu akan membuat tubuh mereka antirobek.",
+" Di Jepang, ketiduran saat bekerja (inemuri) dapat ditolerir, karena dipandang sebagai kelelahan yang muncul akibat bekerja terlalu keras.",
+"Gergaji mekanik awalnya diciptakan sebagai alat kedokteran untuk membantu melahirkan bayi.",
+"Jangan sering mengatakan kata  di Australia dan Selandia Baru. Di sana, kata berarti mengajak untuk melakukan hubungan seks.",
+"Jamur merang Laetiporus dikenal sebagai julukan \"ayam hutan\" karena konon rasanya mirip seperti daging ayam goreng.",
+"Kaki katak merupakan hidangan istimewa di eropa. Tahukah Anda: sekitar 80% impor katak Eropa berasal dari Indonesia.",
+"Jika Anda mengetik \"do the harlem shake\" di search bar YouTube, layar akan melakukan Harlem Shake!. [Google Chrome]",
+"Melihat melalui lubang kecil akan segera meningkatkan penglihatan Anda sementara.",
+"YouTube menyebutkan rata-rata ada 4000 video baru Harlem Shake yang diunggah setiap hari. [Yahoo!]",
+"Semut memiliki kuburan sendiri. Tapi tahukah anda: Gurita memiliki kebun dan suka berkebun. (wikipedia)",
+"Coklat mengandung Theobromine, molekul organik yang dapat membantu menguatkan enamel gigi. (Penelitian dari Tulane University).",
+"Wanita 2 kali lebih banyak menggunakan emoticon dalam pesan teks dibandingkan pria. (Penelitian di Rice University)",
+"Biarpun Buzz Aldrin adalah orang kedua yang menginjak di bulan tetapi ia adalah orang pertama yang membuang kotoran di ruang angkasa.",
+"Fakta unik berikutnya adalah, Psikolog mengatakan bahwa mengirim dan menerima pesan teks benar-benar dapat meningkatkan mood Anda ketika Anda merasa kesepian. (Telegraph)",
+"Thailand merupakan satu-satunya negara di Asia Tenggara yang tidak pernah dijajah.","Musik memiliki kemampuan untuk memperbaiki kerusakan otak serta mengembalikan kenangan yang hilang. (cracked .com)",
+" Perasaan kesepian memicu respon yang sama di otak sebagai rasa sakit fisik. (BBCnews)",
+"Di Cape Town, Afrika Selatan, remaja laki-laki yang memiliki gigi ompong dianggap tampan / maskulin.",
+"Semakin pahit cokelat (tinggi zat theobromine), semakin tinggi manfaatnya. Rajin mengkonsumsi 1bar cokelat/hari dapat menyembuhkan batuk kronis.",
+"Kata \"Mouse\" (tikus) berasal dari turunan Bahasa Sansekerta \"Mus\" yang berarti \"pencuri\".",
+"Tidur Siang (Power Nap) trbukti menambah tinggi badan, dikrnkan saat kita tidur siang hormon pertumbuhan (Growth Hormone) lbh aktif bekerja.",
+"Bilangan prima terbesar di dunia saat ini panjangnya 17 juta digit angka, cukup banyak untuk mengisi 28 lembar halaman pada buku novel.",
+"Menurut sebuah studi, minum teh hijau setelah makan ikan membantu menghalangi zat Mercury yang terkandung dalam ikan memasuki aliran darah.",
+" Memperpanjang usia handphone hingga 4 tahun dapat mengurangi dampak lingkungan sampai 40 persen. [Hasil studi di Swiss]",
+"Duduk bersama dgn teman-teman / keluarga utk makan bersama, dpt meningkatkan kebahagiaan & membantu meringankan depresi. [ehealthnewsdaily]",
+"Abibliophobia adalah fobia atau ketakutan terhadap kehabisan bahan bacaan.",
+"Pada abad pertengahan di Eropa, garam sangat mahal harganya, sehingga disebut sebagai \"emas putih\".",
+"Mengunyah permen karet dapat meningkatkan kemampuan berpikir cepat dan kewaspadaan hingga 10 persen. [Jurnal Brain and Cognition]",
+"Wanita yang sedang stres selama kehamilannya cenderung melahirkan anak-anak yang pemarah. [Institute of Psychiatry, King College London]",
+"35. Disarankan supaya membeli sepatu pada sore hari. Sebab, setelah seharian berjalan, di sore hari kaki akan membesar 5-8 persen.", 
+"Musik memiliki kemampuan untuk memperbaiki kerusakan otak serta mengembalikan kenangan yang hilang. [cracked .com]",
+"Menurut penelitian baru, usia harapan hidup anak band rata-rata lebih tinggi dibandingkan musisi yang memilih solo karir. (detikHealth)",
+"Pulau Dewata Bali merupakan 1 dari 10 pulau paling romantis di dunia. [majalah Travel+Leisure]",
+"Universitas di Jepang selalu melakukan upacara peringatan bagi hewan (contoh: tikus) yang mati dalam pengujian laboratorium. [web.archive .org]",
+"Berkedip memberikan otak Anda istirahat sebentar. [para ilmuan di Japan’s Osaka University]",
+"Wanita yang bahagia dalam sebuah pernikahan akan mengalami berat badan naik setengah pound (0,22 kg) setiap 6 bulan. [DailyMail]",
+"Rasa cemburu berlebihan bisa digolongkan penyakit jiwa, krna dpt mendorong ssorg utk bunuh diri / menghabisi nyawa org lain. [riset]",
+"Mengkonsumsi buah tomat beberapa kali dlm kurun waktu seminggu dpt mengatasi perasaan depresi. [peneliti di Tianjin Medical Univ., Cina]",
+" Perasaan kesepian memicu respon yang sama di otak sebagai rasa sakit fisik. [BBCnews]",
+"Di Cape Town, Afrika Selatan, remaja laki-laki yang memiliki gigi ompong dianggap tampan / maskulin.",
+"Memeluk orang yg disayangi dpt membantu menurunkan tekanan darah, mengurangi stres dan",
+"kecemasan, bahkn dpt meningkatkan memori. [Dailymail]",
+"Kata \"Mouse\" (tikus) berasal dari turunan Bahasa Sansekerta \"Mus\" yang berarti \"pencuri\".Berjalan kaki atau bersepeda ke sekolah mempertajam konsentrasi siswa di kelas dan tetap bertahan sekitar 4 jam kemudian. [Medical Daily]",
+"Menurut riset pasar global Euromonitor International, pria Korea adalah pria yang paling suka bersolek dari pria lain di dunia.",
+"Rata-rata orang akan merasa 100 persen sehat / fit hanya 61 hari dalam setahun. (Penelitian di Inggris)",
+"Polydactyl Cat adalah jenis kucing yang memiliki jempol di kaki mereka.",
+"Hanya dengan mengurangi brightness dari televisi, anda mampu berhemat lebih dari Rp 1,5 juta setahun. [kompas]",
+"Di Jerman, tahanan yg ingin meloloskan diri dr penjara adl bukan mrupakn perbuatan ilegal. Krn itu salah1 naluri dasar manusia untuk kebebasan.",
+"Wanita merasa diri mereka terlihat paling jelek dan terlihat lebih tua pada hari Rabu pukul 15.30 . [studi baru dari St Tropez]Orang yang rutin bermain video game ternyata memiliki penalaran yang baik dibanding kebanyakan orang. (detikHealth)",
+"Nama \"Gorila\" berasal dari kata Yunani \"Gorillai\" yang berarti \"perempuan berbulu\".",
+"IBM mengatakan bahwa dalam kurun waktu 5 tahun ke depan, komputer bakal mirip manusia yang bisa melihat, mendengar, mencium dan merasakan.",
+"Selama abad ke-13, kata \"nice\" sebenarnya berarti “stupid”, \"senseless\" dan “foolish\".",
+"59. 49% dari pemilik Smartphone adalah jomblo. (Survei, \"2012 Online User Behavior and Engagement Study\")",
+"60. Gazzarella adalah keju mozzarella yang terbuat dari susu kucing. 61. Rata-rata orang melihat / mengecek ponselnya sekitar 150 kali sehari. (Laporan Nokia pada MindTrek 2010)",
+"Lalat dapat menyalurkan sekitar 300 bakteri setiap kali hinggap di benda.",
+"Tertawa dapat meningkatkan aktivitas antibodi sekitar 20%, juga membantu untuk menghancurkan virus dan sel-sel tumor.",
+"Fobia matematika (mathematics anxiety) memicu respon yang sama di otak sbg rasa sakit fisik. Gejalanya yaitu melihat angka saja sudah nyeri.",
+" Karakter kartun Bugs Bunny diberi pangkat kehormatan sersan-mayor di Korps Marinir AS pada akhir Perang Dunia II. (wikipedia)",
+"Apel yang ditaruh di ruang terbuka akan matang 10 kali lebih cepat dibandingkan dengan apel yang ditaruh di kulkas.",
+"Ungkapan 'Smitten' adalah untuk menyebut 'naksir' dalam bahasa Inggris.",
+"Menurut etiket internasional, sebuah jabat tangan yang tepat dan baik harus berlangsung selama sekitar 3 detik & dilepaskan setelah goyang.",
+"Ketika kita sedang jatuh cinta, otak akan memproduksi dopamin ekstra, bahan kimia yang membuat seseorang menjadi gembira berlebihan.",
+" \"Mwahahaha\" dan \"lolz\" telah ditambahkan ke Kamus Inggris Oxford.",
+"Menurut penelitian, pria cenderung menurunkan volume suaranya ketika ia berbicara dg seseorang yg ia cintai, sementara perempuan sebaliknya.",
+"Di Perancis, jajanan Arum Manis (Rambut Nenek) disebut \"Barbe á Papa\" yang berarti \"Jenggot Ayah\".",
+"Menurut penelitian, PR terlalu banyak sebenarnya dapat menyebabkan siswa menjadi stres, depresi & mendapat nilai lebih rendah.",
+"Hangry adalah penggabungan kata dari \"Hungry\" dan \"Angry\", di pakai ketika anda sedang lapar dan marah.",
+"Kentut dari bakteri membuat keju swiss memiliki lubang-lubang.",
+"Mendengarkan musik benar-benar dapat mengurangi rasa sakit kronis hingga 20% dan membantu meringankan depresi hingga 25%. (sciencedaily)",
+"Orang yang merasa kesepian memiliki kemungkinan mengalami kepikunan 70-80% lebih tinggi. (Journal of Neurosurgery Neurologi and Psychiatry)",
+"Melamun dpt memendekkan telomere (bagian paling ujung sel DNA) yang berperan dlm menjaga kestabilan sel, dimana dapat mempercepat proses penuaan."
+]
+const fakta = kataf[Math.floor(Math.random() * kataf.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : fakta
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/taugasih', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const taugasih = [
+"Tahukah Anda seekor capung bisa terbang dengan kecepatan 40kph (25mph)",
+"Tahukah Anda bahwa semua burung hantu bertelur putih?",
+"Tahukah Anda bahwa Hawaii secara resmi menjadi bagian dari AS pada 14 Juni 1900",
+"Tahukah Anda bahwa rata-rata orang tertawa 10 kali sehari?",
+"Tahukah Anda bahwa diameter Jupiter adalah 152.800 km (88.700 mil)",
+"Tahukah Anda bahwa warna sikat gigi yang paling populer adalah biru",
+"Tahukah Anda bahwa harimau memiliki kulit belang serta bulu",
+"Tahukah Anda bahwa ngengat tidak punya perut",
+"Tahukah Anda bahwa hamburger ditemukan pada tahun 1900",
+"Tahukah Anda bahwa aichmophobia adalah ketakutan akan jarum dan benda runcing",
+"Tahukah Anda bahwa kuku jari tangan tumbuh lebih cepat daripada kuku kaki",
+"Tahukah Anda kata *hampir* adalah yang terpanjang dalam bahasa Inggris dengan semua huruf dalam urutan abjad",
+"Tahukah Anda bahwa iatrofobia adalah ketakutan akan dokter",
+"Tahukah Anda bahwa membanting pintu mobil Anda dulunya ilegal di Swiss",
+"Tahukah Anda bahwa mamalia terkecil di dunia adalah kelelawar bumblebee dari Thailan",
+"Tahukah Anda bahwa singa memberi makan setiap 3 hingga 4 hari sekali",
+"Tahukah Anda bahwa cangkangnya 12% dari berat telur",
+"Tahukah Anda bahwa landak rata-rata memiliki 30.000 duri",
+"Tahukah Anda bahwa jeruk bali mendapatkan namanya dari cara ia tumbuh dalam kelompok seperti anggur di pohon anggur",
+"Tahukah Anda bahwa 45% orang menggunakan obat kumur setiap hari",
+"Tahukah Anda bahwa umur tupai adalah 9 tahun",
+"Tahukah Anda bahwa Anda dapat membedakan jenis kelamin kuda dari giginya (kebanyakan jantan memiliki 40, betina 36)",
+"Tahukah Anda 10% dari pasokan makanan dunia dikonsumsi oleh serangga",
+"Tahukah kamu awan terbang lebih tinggi di siang hari daripada di malam hari",
+"Tahukah Anda bahwa Empire State Building di New York memiliki berat lebih dari 365.000 ton",
+"Tahukah Anda Antartika terdiri dari 98% es dan 2% batu tandus",
+"Tahukah Anda 90% orang bergantung pada jam alarm untuk bangun",
+"Tahukah Anda bahwa kopi adalah minuman paling populer di seluruh dunia dengan lebih dari 400 miliar cangkir dikonsumsi setiap tahun",
+"Tahukah Anda bahwa Bumi disambar petir lebih dari 100 kali setiap detik",
+"Tahukah Anda bahwa rata-rata orang memiliki 10.000 selera?",
+"Tahukah Anda bahwa sel darah merah diproduksi di sumsum tulang?",
+"Tahukah Anda bahwa 11% orang kidal",
+"Tahukah kamu setiap tahun matahari kehilangan 360 juta ton",
+]
+const taug = taugasih[Math.floor(Math.random() * taugasih.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : taug
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/kataheker', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const heker = [
+  "Dear kamu yang tertulis di halaman defacementku, Kapan jadi pacarku?",
+  "Aku rela ko jadi Processor yg kepanasan, asalkan kmu yg jadi heatsink'y yg setiap saat bisa mendinginkan ku.",
+  "Gak usah nyari celah xss deh, karena ketika kamu ngeklik hatiku udah muncul pop up namamu.",
+  "berharap setelah aku berhasil login di hati kamu ga akan ada tombol logout, dan sessionku ga bakal pernah expired.",
+  "Masa aku harus pake teknik symlink bypass buat buka-buka folder hatimu yg open_basedir enabled.",
+  "Diriku dan Dirimu itu ibarat PHP dan MySQL yang belum terkoneksi.",
+  "Jangan cuma bisa inject hatinya,tapi harus bisa patchnya juga. Biar tidak selingkuh sama hacker lain.",
+  "Aku memang programmer PHP,tapi aku nggak akan php-in kamu kok.",
+  "Eneeeng. | Apache? | Km wanita yg paling Unix yg pernah aku kenal |",
+  "Sayang, capslock kamu nyala ya? | ngga, kenapa emangnya? | soalnya nama kamu ketulis gede bgt di hati aku | zzz! smile",
+  "Aku deketin kamu cuma untuk redirect ke hati temenmu.",
+  "Domain aja bisa parkir, masa cintaku ga bisa parkir dihatimu?",
+  "Aku boleh jadi pacarmu? | 400(Bad Request) | Aku cium boleh? | 401(Authorization Required) | Aku buka bajumu yah | 402(Payment Required) sad",
+  "kamu tau ga beda'y kamu sama sintax PHP, kalo sintax PHP itu susah di hafalin kalo kamu itu susah di lupain",
+  "Kamu dulu sekolah SMK ambil kejuruan apa? | Teknik Komputer Jaringan | Terus sekarang bisa apa aja? | Menjaring hatimu lewat komputerku | biggrin",
+  "Jika cinta itu Array, maka,cintaku padamu tak pernah empty jika di unset().",
+  "SQLI ( Structured Query Love Injection )",
+  "aku ingin kamu rm -rf kan semua mantan di otak mu,akulah root hati kamu",
+  "Senyumu bagaikan cooler yang menyejukan hatiku ketika sedang overclock.",
+  "kamu adalah terminalku, dimana aku menghabiskan waktuku untuk mengetikan beribu baris kode cinta untukmu smile",
+  "Aku seneng nongkrong di zone-h, karena disanalah aku arsipkan beberapa website yang ada foto kamunya.",
+  "hatiku ibarat vps hanya untukmu saja bukan shared hosting yg bisa tumpuk berbagai domain cinta.",
+  "Aku bukanlah VNC Server Tanpa Authentication yg bisa kamu pantau kapan saja.",
+  "Jangan men-dualboot-kan hatiku kepadamu.",
+  "cintaku kan ku Ctrl+A lalu kan ku Ctrl+C dan kan ku Ctrl+V tepat di folder system hatimu.",
+  "KDE kalah Cantiknya, GNOME kalah Simplenya, FluxBox kalah Ringannya, pokonya Semua DE itu Kalah Sama Kamu.",
+  "Cintamu bagaikan TeamViewer yang selalu mengendalikan hatiku",
+  "cinta kita tak akan bisa dipisahkan walau setebal apapun itu firewall...!!"
+]
+const katah = heker[Math.floor(Math.random() * heker.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : katah
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/katangawur', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const ngawur = [
+"Hargai kedua orang tuamu, mereka berhasil lulus dari sekolah tanpa bantuan Google",
+"Seorang laki-laki sukses adalah yang bisa menghasilkan uang lebih dari yang dihabiskan istrinya. Seorang wanita sukses adalah yang bisa mencari laki laki seperti itu.",
+"Manusia boleh berencana, tapi saldo juga yang menentukan.",
+"Bila Anda jelek, jangan takut mencintai. Karena yang seharusnya takut adalah yang Anda cintai. - Cak Lontong",
+"Manusia itu emang susah nyalahin diri sendiri. Leher pegel dibilang salah bantal.",
+"Selalu ikuti kata hatimu. Tapi jangan lupa bawa juga otakmu.",
+"Motivator dan pembicara tak dapat membuatku rajin bekerja. Hanya cicilan dan tagihan yang mampu.",
+"Aku bukan pemalas. Aku sedang menjalankan mode hemat energi.",
+"Anak kecil gak punya temen aja nangis, gimana hati kecil ini yang gak punya pasangan.",
+"Yang rajin mandi kalah menariknya sama yang rajin senyum.",
+"Tidak mengerjakan sesuatu itu sulit. Kamu tidak pernah tahu kapan akan selesai.",
+"Menertawakan kesalahan kita bisa memperpanjang hidup kita sendiri. Menertawakan orang lain bisa mempersingkatnya.",
+"Saat hidup menutup pintu untukmu, buka lagi saja. Itu hanya pintu, itulah cara kerjanya.",
+"Jika ukuran benar-benar penting, gajah sudah lama menjadi raja hutan.",
+"Kita belajar dari pengalaman bahwa manusia tidak pernah belajar apa pun dari pengalaman.",
+"Hidup adalah seni menggambar tanpa penghapus.",
+"Pembenci hanyalah pengagum yang bingung karena mereka tidak tahu alasan mengapa semua orang mencintaimu.",
+"Hidup bergerak sangat cepat. Jika kamu tidak berhenti dan melihat-lihat sesekali, kamu bisa melewatkannya.",
+"Tidur siang terdengar sangat kekanak-kanakan. Aku lebih suka menyebutnya jeda kehidupan horizontal.",
+"Kamu tidak bisa membuat semua orang bahagia. Kamu bukan cokelat.",
+"Tertawa bisa jadi obat terbaik. Tapi kalau kamu tertawa tanpa alasan yang jelas, mungkin kamu butuh obat.",
+"Kuliah lo ambil apa? Gue sih ambil hikmahnya aja.",
+"Bermimpilah sesuka hati tentang apa yang kamu inginkan, sebab itu hanya mimpi.",
+"Jika kamu mencoba untuk gagal, dan berhasil, apa yang sudah kamu lakukan? - George Carlin",
+"Jangan jadi orang lucu karena ujung-ujungnya cuma enak dijadiin temen.",
+"Ya Tuhan jika dia bukan jodohku, tolong hapuskan kata bukan dari hidup ini.",
+"Lebih baik pacaran terus kita disakiti, setidaknya kita pernah dibahagiain daripada di PHP-in, belum pacaran aja kita sudah disakitin. - Cak Lontong",
+"Terlalu banyak manusia berharap pelukan saat hujan. Aku tak senaif itu, senyummu cukup menghangatkan.",
+"Apakah namamu WiFi? Soalnya aku bisa merasakan konektivitas.",
+"Wanita sangat rentan mengidap diabetes, sebab dia sering kali menelan janji manis.",
+"Meskipun kamu gendut, kamu tetap muat kok masuk di hatiku.",
+"Raga kita memang jarang bertemu. Tapi ketahuilah, mimpi ini selalu tentangmu.",
+"Aku sudah siap kalau Senin harus bangun pagi, apalagi bangun rumah tangga sama kamu.",
+"Cintaku ke kamu tuh kayak utang, awalnya kecil, didiemin tau-tau gede sendiri.",
+"Cintaku tidak seperti kopi sachet, instan dan praktis. Tapi, seperti kopi bubuk, penuh perhitungan dan kehati-hatiaan.",
+"Madu di tangan kananmu, racun di tangan kirimu, tapi jodoh tetap di tangan Tuhan.",
+"Tidak apa-apa jika kamu tidak menyukaiku. Tidak semua orang memiliki selera yang baik.",
+"Pepatah bijak berkata tidak akan pernah ada kata terlambat untuk belajar. Berarti belajar mencintai pacar orang juga masih bisa.",
+"Jodoh emang gak ke mana tapi saingan di mana mana.",
+"Lebih baik ditertawakan karena belum menikah daripada tak bisa tertawa setelah menikah.",
+"Hari Minggu itu weekend tapi kalau cinta kita will never end.",
+"Matamu itu kayak lampu merah, membuatku berhenti setiap kali melihatnya.",
+"Setahu aku, fungsi hati itu sebenarnya ada dua, yang pertama untuk menyimpan mineral di dalam tubuh, yang kedua tentu saja untuk menyimpan cintaku padamu.",
+"Kalau naik motor sama kamu pasti ditilang polisi deh. Soalnya kita selalu bertiga, aku, kamu, dan cinta.",
+"Katanya cewek suka cowok yang humoris. Tapi buktinya, mereka lebih seneng sama Aliando dibanding Cak Lontong.",
+"Jika kamu tidak bisa hidup tanpaku, mengapa kamu belum mati?",
+"Jangan kamu mengarungi lautan, percuma. Karena karung lebih cocok untuk beras",
+"Jomblo tidak harus malu, jomblo bukan berarti tidak laku, tapi memang tidak ada yang mau.",
+"Beberapa orang menciptakan kebahagiaan ke mana pun dia pergi, sementara orang yang lain menciptakan kebahagiaan setiap kali dia pergi. - Oscar Wilde",
+"Kita hidup pada zaman di mana saat bertanya malah dikatain kepo dan berbuat baik dianggap modus.",
+"Mencintai kamu itu wajar, yang tidak wajar mencintai bapakmu.",
+"Itu pintu hati atau pintu tol, yang masuk hanya yang bermobil saja.",
+"Seandainya jatuh cinta ada tukang parkirnya, bisa diberhentikan sebelum mentok - Raditya Dika",
+"Putus cinta itu biasa. Putus rem, nyawa taruhannya.",
+"Hati-hati di jalan. Hatinya jangan jalan-jalan. Ingat, ada hati yang lagi dijalani.",
+"Kamu tidak akan menemukan pendamping hidup yang tepat jika kamu tinggal di Mars.",
+"Kalau disuruh melupakanmu, aku harus ke kantor kelurahan dulu bikin surat keterangan tidak mampu.",
+"Tiga hal yang bikin seseorang tidak disukai: otak yang kosong, omong kosong, dan dompet yang kosong.",
+"Satu hal yang membuat mata tak bisa terpejam, bagaimana caranya agar aku bisa membuat pacarmu percaya padaku untuk menjagamu.",
+"Cinta itu harusnya seperti pelajaran kimia, bukan cuma teori tapi ada praktik juga.",
+]
+const kataw = ngawur[Math.floor(Math.random() * ngawur.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : kataw
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/katagombal', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const gombal = [
+"Kamu tau gak? Kenapa kalau aku menghafal lihatnya ke atas? soalnya kalau merem langsung kebayang wajahmu.",
+"Orang kurus itu setia, makan aja tidak pernah nambah apalagi pasangan.",
+"Kamu tu kayak warteg, sederhana namun berkualitas.",
+"Aku gak sedih kok kalo besok hari senin, aku sedihnya kalau gak ketemu kamu.",
+"Cintaku kepadamu itu bagaikan metabolisme, yang gak akan berhenti sampai mati.",
+"Kamu tau gak apa persamaannya kamu sama AC? Sama-sama bikin aku sejuk.",
+"Aku hanya ingin hidup cukup. Cukup lihat senyummu setiap hari.",
+"Aku rela ikut lomba lari keliling dunia, asalkan engkau yang menjadi garis finisnya.",
+"Kalau orang kebutuhan primernya ada tiga yaitu sandang pangan dan papan, tapi kalau aku : kamu, kamu, kamu.",
+"Cita-citaku dulu pengen jadi dokter, tapi setelah mengenalmu, berubah jadi ingin membahagiakanmu.",
+"Enak ya jadi kamu, kalau mau liat bidadari, tinggal liat di kaca.",
+"Jika kamu tanya berapa kali kamu datang ke pikiranku, jujur saja, cuma sekali. Habisnya, gak pergi-pergi sih!",
+"Jangan GR deh. Aku kangen kamu sedikit aja kok. Sedikit berlebihan maksudnya.",
+"Tanggal merah sekalipun aku tidak libur untuk memikirkan kamu.",
+"Cintaku padamu bagai diare. Tak bisa kutahan, terus keluar begitu saja.",
+"Aku ga lulus ulangan umum sayang, gara-gara di bagian essay-nya aku tulis surat cinta buat kamu.",
+"Tahu gak kenapa kita cuma bisa lihat pelangi setengah lingkaran? Sebab setengahnya lagi ada di mata kamu.",
+"Kalo kamu lagi di AS, Patung Liberty ga akan bawa obor tapi bakal bawa BUNGA!",
+"Aku rela jadi abang nasi goreng asalkan setiap malam aku bisa lewat depan rumah kamu.",
+"Aku rela dipenjara seumur hidup asalkan pelanggarannya karena mencintaimu.",
+"Kamu tau gak? Lukisan itukan makin lama makin antik, kalo kamu makin lama makin cantik",
+]
+const tagka = gombal[Math.floor(Math.random() * gombal.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : tagka
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/kataislam', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const islam = [
+'Segala sesuatu telah Allah takdirkan. - QS. Al Qamar : 49',
+'Dan sesungguhnya DIA lah yang menjadikan orang tertawa dan menangis. - QS. An Najm: 43',
+'Janganlah kamu berduka cita, sesungguhnya Allah selalu bersama kita.- QS At-Taubah: 40',
+'Maka sesungguhnya bersama kesulitan itu ada kemudahan.QS Al Insyirah: 5',
+'Sesungguhnya Allah tidak akan mengubah keadaan suatu kaum hingga mereka merubah keadaan yang ada pada diri mereka sendiri. - Q.S. Ar Rad: 11',
+'Sesungguhnya Kami telah menciptakan manusia dalam bentuk yang sebaik-baiknya. - QS At- Tin: 4',
+'Dan Kami jadikan kamu berpasang-pasangan. - QS. An-Naba: 8',
+'Maka jangan sekali-kali membiarkan kehidupan dunia ini memperdayakan kamu. - QS. Fatir: 5',
+'Dan bersabarlah kamu, sesungguhnya janji Allah adalah benar. - QS. Ar-Rum: 60',
+'Dan barang siapa yang bertakwa kepada Allah, niscaya Allah menjadikan baginya kemudahan dalam urusannya. - Q.S At-Talaq: 4',
+'Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya. - QS. Al-Baqarah: 286',
+'Tidakkah dia menyadari bahwa sesungguhnya Allah melihat segala perbuatannya?. - QS. Al-Alaq: 14',
+'Bersabarlah wahai hati kelak akan ada seseorang yang datang dan siap menemani sisa hidupmu dalam ketaatan',
+'Diri kita sendiri yang bisa menentukan apakah cinta kita berbuah dosa ataukah berbuah pahala',
+'Dirimu yang sebenarnya adalah apa yang kamu lakukan di saat di ada orang yang melihatmu',
+'Janji Allah tak pernah mengecewakan, dan bila kamu masih meras kecewa mungkin ada yang salah dengan imanmu',
+'Rasa syukur tidak akan datang kepada orang yang tidak beriman dan tidak pernah kenyang',
+'Maafkan aku andai apa yang aku tulis dan aku share tentang ilmu agama tidak sesuai dengan coberku dan kehidupanku yang asli',
+'Kebanyakan manusia lebih senang menyalahkan orang lain daripada menyalahkan diri sendiri',
+'Biarlah orang melihat penampilah kita biasa, tetapi luar biasa di mata Allah',
+'Bersyukurlah bila dalam penantianmu, kau tetap gigih dalam kesendirian, sebab artinya kau telah memuliakan jalan Allah',
+'Malu akan sebuah masalah itu boleh tapi jangan berlebihan sebab jika kita Yakin Pertolongan Allah itu sangatlah nyata',
+'Yakinlah bahwa ada doanya yang terus dipanjatkan kepada Allah yang tidak putus-putus dari orang tua kita agar kita senantiasa menjadi anak yang sholeh dan sholehah',
+'Setiap hari aku berusaha semaksimal mungkin mencari rizki yang halal demi bisa menghalalkanmu',
+'Jatuh cinta bisa jadi sangat menyakitkan jika kita tidak mampu untuk mengendalikannya',
+]
+const katis = islam[Math.floor(Math.random() * islam.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : katis
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+router.get('/search/katailham', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if (listkey.includes(apikey)){
+const ilhamberkata = [
+'Lebih baik mengerti sedikit daripada salah mengerti.',
+'Hampir semua pria memang mampu bertahan menghadapi kesulitan. Namun, jika Anda ingin menguji karakter sejati pria, beri dia kekuasaan.',
+'Bila tekad seseorang kuat dan teguh, Tuhan akan bergabung dalam usahanya.',
+'Penderitaan adalah pelajaran.',
+'Ilmu pengetahuan tanpa agama adalah pincang.',
+'Hidup itu seperti sebuah sepeda, agar tetap seimbang kita harus tetap bergerak.',
+'Perbedaan masa lalu, sekarang, dan masa depan tak lebih dari ilusi yang keras kepala.',
+'Sebuah meja, sebuah kursi, semangkuk buah, dan sebuah biola; apa lagi yang dibutuhkan agar seseorang bisa merasa bahagia?',
+'Belas kasihanlah terhadap sesama, bersikap keraslah terhadap diri sendiri.',
+'Cara paling baik untuk menggerakkan diri Anda ialah memberi tugas kepada diri sendiri.',
+'Kita tidak boleh kehilangan semangat. Semangat adalah stimulan terkuat untuk mencintai, berkreasi dan berkeinginan untuk hidup lebih lama.',
+'Manusia akan bahagia selama ia memilih untuk bahagia.','Saya tidak berharap menjadi segalanya bagi setiap orang. Saya hanya ingin menjadi sesuatu untuk seseorang.',
+'Apabila sempurna akal seseorang, maka sedikit perkataannya.','Bahagialah orang yang dapat menjadi tuan untuk dirinya, menjadi kusir untuk nafsunya dan menjadi kapten untuk bahtera hidupnya.',
+'Sahabat yang jujur lebih besar harganya daripada harta benda yang diwarisi dari nenek moyang.','Yang paling melelahkan dalam hidup adalah menjadi orang yang tidak tulus.',
+'Terbuka untuk Anda, begitulah Tuhan memberi kita jalan untuk berusaha. Jangan pernah berfikir jalan sudah tertutup.',
+'Penundaan adalah kuburan dimana peluang dikuburkan.','Cinta bukan saling menatap mata, namun melihat ke arah yang sama bersama-sama.',
+'Kita adalah apa yang kita kerjakan berulang kali. Dengan demikian, kecemerlangan bukan tindakan, tetapi kebiasaan.',
+'Jangan pernah mencoba menjadikan putra atau putri Anda menjadi seperti Anda. Diri Anda hanya cukup satu saja.',
+'Jika Anda bisa membuat orang lain tertawa, maka Anda akan mendapatkan semua cinta yang Anda inginkan.',
+'Masalah akan datang cepat atau lambat. Jika masalah datang, sambut dengan sebaik mungkin. Semakin ramah Anda menyapanya, semakin cepat ia pergi.',
+'Kita tak bisa melakukan apapun untuk mengubah masa lalu. Tapi apapun yang kita lakukan bisa mengubah masa depan.',
+'Kesabaran adalah teman dari kebijaksanaan.','Orang-orang kreatif termotivasi oleh keinginan untuk maju, bukan oleh keinginan untuk mengalahkan orang lain.',
+'Dimanapun engkau berada selalulah menjadi yang terbaik dan berikan yang terbaik dari yang bisa kita berikan.',
+'Kebencian seperti halnya cinta, berkobar karena hal-hal kecil.',
+'Anda tidak perlu harus berhasil pada kali pertama.',
+'Satu jam yang intensif, jauh lebih baik dan menguntungkan daripada bertahun-tahun bermimpi dan merenung-renung.',
+'Hal terbaik yang bisa Anda lakukan untuk orang lain bukanlah membagikan kekayaan Anda, tetapi membantu dia untuk memiliki kekayaannya sendiri.',
+'Tidak ada jaminan keberhasilan, tetapi tidak berusaha adalah jaminan kegagalan.',
+'Aku tidak tahu kunci sukses itu apa, tapi kunci menuju kegagalan adalah mencoba membuat semua orang senang.'
+]
+const katail = ilhamberkata[Math.floor(Math.random() * ilhamberkata.length)]
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+       	result : katail
+       })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
 router.get('/randomgambar/cyberspace', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
@@ -2724,6 +3592,46 @@ if(listkey.includes(apikey)){
 			console.log('Error :', color(e, 'red'))
 			res.json(loghandler.error)
 		})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+router.get('/randomgambar/memesticker', async (req, res, next) => {
+var apikey = req.query.apikey
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+	let stikerhuuu = [
+ "https://telegra.ph/file/fa2bbea0f7de2575cf027.png",//patrick huu
+ "https://telegra.ph/file/4a2db7bc9f3f9ecfc007d.png",//anime yntkts
+ "https://telegra.ph/file/5f6079714851d9927697e.png",//windah bocil
+ "https://telegra.ph/file/d5100b4ce95a0012e88c1.png",//patrick bawa minum
+ "https://telegra.ph/file/2ade25087c89f86587853.png",//pak polisi pap tt
+ "https://telegra.ph/file/eb2b5e5fff569896c1639.png",//kucing1
+ "https://telegra.ph/file/bd8a0e7ea01218531798b.png",//kacamata
+ "https://telegra.ph/file/300610838ffa0e6576eb9.png",//patrick pembohong
+ "https://telegra.ph/file/954afe562e58c144620ae.png",//spongebob FBI
+ "https://telegra.ph/file/72026dcc46e4cb4b6f9ae.png",//mazowski monster inc
+ "https://telegra.ph/file/aa9f1bea869e362e6f56e.png",//wkwk
+ "https://telegra.ph/file/09bbff0da316ba21b4f8e.png",//kucing2
+ "https://telegra.ph/file/2e0637d57e3cc1abcb4a0.png",//patrick anak setan
+ "https://telegra.ph/file/d771ae015b5486859d03f.png",//mazowski 2
+ "https://telegra.ph/file/9c7606f571c05b4d0c941.png",//hengker
+ "https://telegra.ph/file/84fd937257bcd614d6c9e.png",//anjing
+ "https://telegra.ph/file/b8ba6989c00c50df049d0.png",//bapak bapak lovee
+ "https://telegra.ph/file/2f618fffab6ff7bea32ab.png",//abang saleh
+ "https://telegra.ph/file/dfbf483c209a31f01b4e5.png"//hengker2
+]
+       var result = stikerhuuu[Math.floor(Math.random() * stikerhuuu.length)];
+         var requestSettings = {
+      url: result,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });
 } else {
   res.json(loghandler.apikey)
 }
@@ -2930,9 +3838,9 @@ router.get('/nsfw/blowjob', async (req, res, next) => {
       res.set('Content-Type', 'image/png');
       res.send(body);
    });
+   }) 
 .catch((err) =>{
  res.json(loghandler.error)
-})
 })
 } else {
   res.json(loghandler.apikey)
@@ -2950,9 +3858,9 @@ router.get('/nsfw/cuckold', async (req, res, next) => {
 	res.set({'Content-Type': 'image/png'})
 	res.send(result)
 	})
+	}) 
 .catch((err) =>{
  res.json(loghandler.error)
-})
 })
 } else {
   res.json(loghandler.apikey)
@@ -4236,7 +5144,7 @@ res.json(loghandler.apikey)
 }
 })
 
-router.get('/other/kodepos', async (req, res, next) => {
+router.get('/info/kodepos', async (req, res, next) => {
 var apikey = req.query.apikey
 var text = req.query.kota
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4258,7 +5166,7 @@ if(listkey.includes(apikey)){
 }
 })
 
-router.get('/other/covid-world', async (req, res, next) => {
+router.get('/info/covid-world', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -4278,7 +5186,7 @@ if(listkey.includes(apikey)){
 }
 })
 
-router.get('/other/covid-indonesia', async (req, res, next) => {
+router.get('/info/covid-indonesia', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -4298,7 +5206,7 @@ if(listkey.includes(apikey)){
 }
 })
 
-router.get('/other/kbbi', async (req, res, next) => {
+router.get('/info/kbbi', async (req, res, next) => {
 var apikey = req.query.apikey
 var kata = req.query.kata
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4417,7 +5325,7 @@ res.json(loghandler.apikey)
 }
 })
 
-router.get('/shortlink/cuttly', async (req, res, next) => {
+router.get('/other/cuttly', async (req, res, next) => {
 var apikey = req.query.apikey
 var url = req.query.url
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4438,7 +5346,7 @@ res.json(loghandler.apikey)
 }
 });
 
-router.get('/other/tinyurlwithalias', async (req, res, next) => {
+router.get('/other/pixnet0rz', async (req, res, next) => {
 var apikey = req.query.apikey
 var url = req.query.url
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4446,7 +5354,7 @@ if(listkey.includes(apikey)){
 if (!url) return res.json(loghandler.noturl)
 var islink = isUrl(url)
 if (!islink) return res.json(loghandler.noturl)  
-TinyUrl.shortenWithAlias(url, function(url, err) {
+pixnet0rz.short(url, function(url, err) {
   if (err) return res.json(loghandler.error)
 	res.json({
 		status: true,
@@ -4487,7 +5395,32 @@ if (!islink) return res.json(loghandler.noturl)
 }
 })
 
-router.get('/other/shorturl', async (req, res, next) => {
+router.get('/other/isgd', async (req, res, next) => {
+var apikey = req.query.apikey
+var url = req.query.url
+if(!apikey) return res.json(loghandler.noapikey)
+if(listkey.includes(apikey)){
+if (!url) return res.json(loghandler.noturl)
+var islink = isUrl(url)
+if (!islink) return res.json(loghandler.noturl)
+     request(`https://is.gd/create.php?format=simple&url=${url}`, function (error, response, body) {
+         try {
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result : `${body}`
+             })
+         } catch (e) {
+             console.log('Error :', color(e,'red'))
+             res.json(loghandler.error)
+         }
+     })
+   } else {
+res.json(loghandler.apikey)
+}
+})
+
+/*router.get('/other/shorturl', async (req, res, next) => {
 var apikey = req.query.apikey
 var url = req.query.url
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4510,9 +5443,9 @@ if (!islink) return res.json(loghandler.noturl)
 } else {
   res.json(loghandler.apikey)
 }
-})
+})*/
 
-router.get('/other/fakedata', async (req, res, next) => {
+router.get('/info/fakedata', async (req, res, next) => {
 var apikey = req.query.apikey
 var country = req.query.country            
 if(!apikey) return res.json(loghandler.noapikey)
@@ -4536,7 +5469,7 @@ res.json(loghandler.apikey)
 }
 })
 
-router.get('/other/infoip', async (req, res, next) => {
+/*router.get('/info/infoip', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if (listkey.includes(apikey)){
@@ -4554,14 +5487,16 @@ if (listkey.includes(apikey)){
 	} else {
 res.json(loghandler.apikey)
 }
-})
+})*/
 
-router.get("/tools/cekip", async (req, res) => {
+router.get("/info/cekip", async (req, res) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if (listkey.includes(apikey)){
-	await fetchJson("https://api.ipgeolocation.io/ipgeo?apiKey=173ab2a4ae9e4f18a00b630916e9eec5&include=user-agent")
-   .then(result => {
+	fetch(encodeURI("https://api.ipgeolocation.io/ipgeo?apiKey=173ab2a4ae9e4f18a00b630916e9eec5&include=user-agent")) 
+   .then(response => response.json())
+        .then(data => {
+        var result = data;
 			res.json({
 				creator: creator,
 				result
@@ -4615,7 +5550,7 @@ res.json(loghandler.apikey)
 }
 })
 
-router.get('/other/fakeua', async (req, res, next) => {
+router.get('/info/fakeua', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if(listkey.includes(apikey)){
@@ -5675,7 +6610,35 @@ result : random
 }
 })
 
-router.get('/other/gempa', async (req, res, next) => {
+router.get('/other/tahta', async (req, res, next) => {
+          var apikey = req.query.apikey
+       	var text = req.query.query
+       	if(!apikey) return res.json(loghandler.noapikey)
+       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter query"})      
+         if(listkey.includes(apikey)){
+       tahta(text)
+	.then(data => {
+		var requestSettings = {
+      url: data,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/gif');
+      res.send(body);
+   });
+		})
+         .catch(e => {
+			console.log('Error :', color(e, 'red'))
+			res.json(loghandler.error)
+		})
+} else {
+  res.json(loghandler.apikey)
+}
+})
+
+
+router.get('/info/gempa', async (req, res, next) => {
 var apikey = req.query.apikey
 if(!apikey) return res.json(loghandler.noapikey)
 if (listkey.includes(apikey)){

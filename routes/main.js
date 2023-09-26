@@ -4,6 +4,11 @@ var { performance } = require('perf_hooks');
 var fetch = require('node-fetch');
 var express = require('express');
 var router = express.Router();
+var { performance } = require('perf_hooks');
+
+// Lib
+var { runtime, fetchJson } = require('../lib/fetcher')
+
 
 router.get('/', (req, res) => {
     res.sendFile(__path + '/views/home.html')
@@ -21,34 +26,46 @@ router.get('/upload', (req, res) => {
     res.sendFile(__path + '/views/upload.html')
 })
 
-router.post('/status', async(req, res) => {  
-
+// Main Api
+// Statistic
+router.get('/main/statistic', async (req, res, next) => {
 var date = new Date
-var jam = date.getHours()
-var menit = date.getMinutes()
-var detik = date.getSeconds()
-var old = performance.now()
+var hour = date.getHours()
+var minute = date.getMinutes()
+var second = date.getSeconds()
 var neww = performance.now()
+var old = performance.now()
 var ram = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB`
 var cpu = require('os').cpus()
 var json = await (await fetch('https://api.ipify.org/?format=json')).json()
-var port = process.env.PORT || 8080 || 5000 || 3000 
+var port = process.env.PORT || 8888 || 5000 || 3000 
     status = {
-        status: 'online',
+        status: true,
         memory: ram,
-        cpu: cpu[0].model,
+        cpu: cpu,
         port: port,
         ip: json.ip,
-        time: `${jam} : ${menit} : ${detik}`,
-        uptime: muptime(process.uptime()),
-        speed: `${neww - old}ms`,
+        time: `${hour} : ${minute} : ${second}`,        
+        speed: `${old - neww}ms`,
         info:{       
-            owner: 'KAYZOKUN12',            
-            apikey: 'Chat Owner: https://wa.me/6281545537615'
+            creator: 'KAYZOKUN12'
         }
     }
     res.json(status)
 })
+
+// Runtime
+router.get('/main/runtime', async (req, res, next) => {
+	runtim = {
+		status: true,
+		runtime: muptime(process.uptime()),
+		info:{       
+            creator: 'KAYZOKUN12'            
+        }
+    }
+    res.json(runtim)
+})
+
 
 module.exports = router
 
