@@ -41,7 +41,7 @@ const { tahta } = require(__path + '/lib/tahta.js')
 const { create } = require(__path + '/lib/textpro.js') 
 
 const { Pixnet0rz } = require(__path + '/lib/short.js');
-const Pixnet0rz = new Pixnet0rz();
+const pixnet0rz = new Pixnet0rz();
 
 var {
   CovidIndo, 
@@ -3853,12 +3853,17 @@ router.get('/nsfw/cuckold', async (req, res, next) => {
        fetch(encodeURI(`https://raw.githubusercontent.com/KAYZOKUN12/data-rest/main/nsfw/cuckold.json`))
         .then(response => response.json())
         .then((data) =>{ 
-        var test = data;
-        var result = test[Math.floor(Math.random() * test.length)];
-	res.set({'Content-Type': 'image/png'})
-	res.send(result)
-	})
-	}) 
+        var result = data[Math.floor(Math.random() * data.length)];
+         var requestSettings = {
+      url: result,
+      method: 'GET',
+      encoding: null
+   };
+   request(requestSettings, function(error, response, body) {
+      res.set('Content-Type', 'image/png');
+      res.send(body);
+   });
+   })
 .catch((err) =>{
  res.json(loghandler.error)
 })
